@@ -82,7 +82,9 @@ public class ListWork {
                     return true;
                 }
             } catch (NullPointerException npe) {
-                return false;
+                if(item == null) {
+                    return true;
+                }
             }
         }
 
