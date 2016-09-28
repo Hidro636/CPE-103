@@ -29,7 +29,7 @@ public class Separator {
                 f++;
                 System.out.println("Was a float (" + f + ")");
             } else {
-
+                break;
             }
 
             input.next();
