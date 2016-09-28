@@ -32,7 +32,7 @@ public class Separator {
 
             }
 
-            input.nextLine();
+            input.next();
         }
 
         //print
