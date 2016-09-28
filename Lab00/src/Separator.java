@@ -20,17 +20,11 @@ public class Separator {
         while (input.hasNext() && integers.size() < MAX && floats.size() < MAX) {
             if (input.hasNextInt()) {
                 integers.add(input.nextInt());
-                i++;
-                System.out.println("Was an int (" + i + ")");
             } else if (input.hasNextFloat()) {
                 floats.add(input.nextFloat());
-                f++;
-                System.out.println("Was a float (" + f + ")");
             } else {
                 break;
             }
-
-            input.next();
         }
 
         //print
@@ -43,6 +37,8 @@ public class Separator {
         for (Float value : floats) {
             System.out.print(value + " ");
         }
+
+	System.out.println();
 
     }
 }
