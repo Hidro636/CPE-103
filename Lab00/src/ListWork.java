@@ -72,7 +72,6 @@ public class ListWork {
      */
     public static <T> boolean search(T[] arr, T target) {
         if (arr == null || arr.length == 0) {
-            
             return false;
         }
 
