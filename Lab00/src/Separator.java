@@ -21,10 +21,14 @@ public class Separator {
             if (input.hasNextInt()) {
                 if (integers.size() < MAX) {
                     integers.add(input.nextInt());
+                } else if (integers.size() == MAX) {
+                    break;
                 }
             } else if (input.hasNextFloat()) {
                 if(floats.size() < MAX) {
                 floats.add(input.nextFloat());
+                } else if (integers.size() == MAX) {
+                    break;
                 }
 
             } else {
