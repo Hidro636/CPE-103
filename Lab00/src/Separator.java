@@ -17,7 +17,7 @@ public class Separator {
         ArrayList<Float> floats = new ArrayList<>();
 
         //Get input
-        while (input.hasNext() && integers.size() < MAX && floats.size() < MAX) {
+        while (input.hasNext()) {
             if (input.hasNextInt()) {
                 integers.add(input.nextInt());
             } else if (input.hasNextFloat()) {
@@ -25,6 +25,11 @@ public class Separator {
             } else {
                 break;
             }
+            
+            if(integers.size() == MAX && floats.size() == MAX) {
+                break;
+            }
+            
         }
 
         //print
