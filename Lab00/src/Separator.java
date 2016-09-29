@@ -37,14 +37,14 @@ public class Separator {
         }
 
         //print
-        System.out.print("Integers: ");
+        System.out.print("Integers:");
         for (Integer value : integers) {
-            System.out.print(value + " ");
+            System.out.print(" " + value);
         }
 
-        System.out.print("\nFloats: ");
+        System.out.print("\nFloats:");
         for (Float value : floats) {
-            System.out.print(value + " ");
+            System.out.print(" " + value);
         }
 
         System.out.println();
