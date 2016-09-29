@@ -19,17 +19,21 @@ public class Separator {
         //Get input
         while (input.hasNext()) {
             if (input.hasNextInt()) {
-                integers.add(input.nextInt());
+                if (integers.size() < MAX) {
+                    integers.add(input.nextInt());
+                }
             } else if (input.hasNextFloat()) {
-                floats.add(input.nextFloat());
+                if (floats.size() < MAX) {
+                    floats.add(input.nextFloat());
+                }
             } else {
                 break;
             }
-            
-            if(integers.size() == MAX && floats.size() == MAX) {
+
+            if (integers.size() == MAX && floats.size() == MAX) {
                 break;
             }
-            
+
         }
 
         //print
@@ -43,7 +47,7 @@ public class Separator {
             System.out.print(value + " ");
         }
 
-	System.out.println();
+        System.out.println();
 
     }
 }
