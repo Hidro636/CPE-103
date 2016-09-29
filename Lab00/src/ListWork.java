@@ -98,7 +98,7 @@ public class ListWork {
      */
     public static <T> void print(T[] arr) {
         for (T item : arr) {
-            System.out.println(item.toString());
+            System.out.println(item);
         }
     }
 

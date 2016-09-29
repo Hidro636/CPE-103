@@ -1,5 +1,9 @@
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -22,8 +26,16 @@ public class ListWorkTest {
         boolean result = ListWork.search(arr, null);
         assertEquals(expResult, result);
         
-        
-       
+    }
+
+    /**
+     * Test of print method, of class ListWork.
+     */
+    @Test
+    public void testPrint() {
+        System.out.println("print");
+        Object[] arr = {true, false, null, false, null};
+        ListWork.print(arr);
     }
     
 }
