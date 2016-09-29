@@ -27,7 +27,7 @@ public class Separator {
             } else if (input.hasNextFloat()) {
                 if(floats.size() < MAX) {
                 floats.add(input.nextFloat());
-                } else if (integers.size() == MAX) {
+                } else if (floats.size() == MAX) {
                     break;
                 }
 
