@@ -17,20 +17,23 @@ public class Separator {
         ArrayList<Float> floats = new ArrayList<>();
 
         //Get input
-        while (input.hasNext() && integers.size() < MAX && floats.size() < MAX) {
+        while (input.hasNext() && (integers.size() <= MAX || floats.size() <= MAX)) {
             if (input.hasNextInt()) {
-                integers.add(input.nextInt());
-
+                if (integers.size() < MAX) {
+                    integers.add(input.nextInt());
+                }
             } else if (input.hasNextFloat()) {
+                if(floats.size() < MAX) {
                 floats.add(input.nextFloat());
+                }
 
             } else {
                 break;
             }
 
-//            if (integers.size() == MAX && floats.size() == MAX) {
-//                break;
-//            }
+            if (integers.size() == MAX && floats.size() == MAX) {
+                break;
+            }
         }
 
         //print
