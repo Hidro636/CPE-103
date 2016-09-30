@@ -4,6 +4,7 @@
  *
  * @author Lucas Robertson
  * @version Lab 1
+ * @param <T>  The generic type of the list
  */
 public interface SimpleList<T> {
 

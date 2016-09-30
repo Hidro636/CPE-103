@@ -9,9 +9,12 @@
 public class SimpleLinkedList<T> implements SimpleList<T> {
 
     private int size;
-    private Node first;
-    private Node last;
+    private final Node first;
+    private final Node last;
 
+    /**
+     * List constructor
+     */
     public SimpleLinkedList() {
         size = 0;
         first = new Node(null);
