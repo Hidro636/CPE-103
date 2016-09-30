@@ -25,29 +25,23 @@ public class SimpleLinkedList<T> implements SimpleList<T> {
 
     @Override
     public void add(int index, T element) {
-        if (size == 0) {
-            add(element);
-        } else {
-
-            if (index < 0 || index >= size) {
-                throw new IndexOutOfBoundsException();
-            }
-
-            Node<T> current = first.next;
-            int i = 0;
-            while (i < index) {
-                current = current.next;
-                i++;
-            }
-
-            Node<T> newNode = new Node(element);
-            newNode.next = current;
-            newNode.previous = current.previous;
-
-            current.previous.next = newNode;
-            current.next.previous = newNode;
-
+        if (index < 0 || ((size == 0 && index != 0) || (index >= size && size != 0))) {
+            throw new IndexOutOfBoundsException();
         }
+
+        Node<T> current = first.next;
+        int i = 0;
+        while (i < index) {
+            current = current.next;
+            i++;
+        }
+
+        Node<T> newNode = new Node(element);
+        newNode.next = current;
+        newNode.previous = current.previous;
+
+        current.previous.next = newNode;
+        current.next.previous = newNode;
 
         size++;
     }

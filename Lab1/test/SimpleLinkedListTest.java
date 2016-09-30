@@ -17,7 +17,7 @@ public class SimpleLinkedListTest {
      */
     @Test
     public void testAdd_int_GenericType() {
-        System.out.println("add");
+        System.out.println("\nTesting add()...");
         int index = 0;
         Object element = 13;
         SimpleLinkedList instance = new SimpleLinkedList();
@@ -28,9 +28,14 @@ public class SimpleLinkedListTest {
         instance.add(4);
         instance.add(5);
 
+        System.out.println("Before add:");
+        traverseList(instance);
+
         instance.add(index, element);
 
+        System.out.println("After add (i = 0):");
         traverseList(instance);
+
         assertEquals(instance.get(0), 13);
         assertEquals(instance.get(1), 1);
 
@@ -41,12 +46,20 @@ public class SimpleLinkedListTest {
      */
     @Test
     public void testAdd_GenericType() {
-        System.out.println("add");
-        Object element = null;
+        System.out.println("\nTesting add()...");
+        Object element = "Node";
         SimpleLinkedList instance = new SimpleLinkedList();
+
+        System.out.println("Before add:");
+        traverseList(instance);
+
         instance.add(element);
 
-        instance.add(null);
+        System.out.println("After add:");
+        traverseList(instance);
+
+        assertEquals(instance.get(0), element);
+
     }
 
     /**
@@ -54,7 +67,7 @@ public class SimpleLinkedListTest {
      */
     @Test
     public void testGet() {
-        System.out.println("Testing get()...");
+        System.out.println("\nTesting get()...");
         int index = 1;
         SimpleLinkedList instance = new SimpleLinkedList();
 
@@ -73,6 +86,7 @@ public class SimpleLinkedListTest {
         index = 4;
         result = instance.get(index);
         assertEquals(expResult, result);
+
     }
 
     /**
@@ -80,7 +94,7 @@ public class SimpleLinkedListTest {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
+        System.out.println("\nTesting remove()...");
         int index = 3;
         SimpleLinkedList instance = new SimpleLinkedList();
 
@@ -91,12 +105,16 @@ public class SimpleLinkedListTest {
         instance.add(5);
         instance.add(6);
 
-        //traverseList(instance);
+        System.out.println("Before remove:");
+        traverseList(instance);
+
         Object expResult = 4;
         Object result = instance.remove(index);
         assertEquals(expResult, result);
 
-        //traverseList(instance);
+        System.out.println("After remove (i = 3) :");
+        traverseList(instance);
+
         expResult = 5;
         result = instance.get(index);
         assertEquals(expResult, result);
@@ -106,7 +124,8 @@ public class SimpleLinkedListTest {
         expResult = 2;
         assertEquals(expResult, result);
 
-        //traverseList(instance);
+        System.out.println("After remove (i = 0):");
+        traverseList(instance);
     }
 
     /**
