@@ -1,62 +1,103 @@
 
 /**
  *
- *
  * @author Lucas Robertson
  * @version Lab 1
+ *
+ * @param <T> The generic type of the list
  */
-public class SimpleLinkedList implements SimpleList {
+public class SimpleLinkedList<T> implements SimpleList<T> {
 
     private int size;
     private Node first;
     private Node last;
 
     public SimpleLinkedList() {
-        this.size = 0;
-        this.first = null;
-        this.last = null;
+        size = 0;
+        first = new Node(null);
+        last = new Node(null);
+        first.next = last;
+        last.previous = first;
     }
 
     @Override
-    public <T> void add(int index, T element) {
-
-    }
-
-    @Override
-    public <T> void add(T element) {
+    public void add(int index, T element) {
         if (size == 0) {
-            first = new Node(element);
-            last = first;
+            add(element);
         } else {
-            Node newNode = new Node(element);
 
-            newNode.previous = last;
-            last = newNode;
-            last.previous.next = newNode;
+            if (index < 0 || index >= size) {
+                throw new IndexOutOfBoundsException();
+            }
+
+            Node<T> current = first.next;
+            int i = 0;
+            while (i < index) {
+                current = current.next;
+                i++;
+            }
+
+            Node<T> newNode = new Node(element);
+            newNode.next = current;
+            newNode.previous = current.previous;
+
+            current.previous.next = newNode;
+            current.next.previous = newNode;
+
         }
 
         size++;
-
     }
 
     @Override
-    public <T> T get(int index) throws IndexOutOfBoundsException {
+    public void add(T element) {
+        Node<T> newNode = new Node<>(element);
+        Node<T> previousLast = last.previous;
+
+        newNode.next = last;
+        newNode.previous = previousLast;
+        previousLast.next = newNode;
+
+        last.previous = newNode;
+
+        size++;
+    }
+
+    @Override
+    public T get(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        
+
+        Node<T> current = first.next;
         int i = 0;
-        Node current = first;
-        while(i < index) {
+        while (i < index) {
             current = current.next;
+            i++;
         }
-        
-        return current.element;
+
+        return current.value;
+
     }
 
     @Override
-    public <T> T remove(int index) throws IndexOutOfBoundsException {
-        return null;
+    public T remove(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        Node<T> current = first.next;
+        int i = 0;
+        while (i < index) {
+            current = current.next;
+            i++;
+        }
+
+        current.previous.next = current.next;
+        current.next.previous = current.previous;
+        size--;
+
+        return current.value;
     }
 
     @Override
@@ -64,16 +105,14 @@ public class SimpleLinkedList implements SimpleList {
         return this.size;
     }
 
-    private class Node<E> {
+    private class Node<Element> {
 
-        public E element;
-        public Node next;
-        public Node previous;
+        private Element value;
+        private Node next;
+        private Node previous;
 
-        public Node(E element) {
-            this.element = element;
-            this.next = null;
-            this.previous = null;
+        public Node(Element value) {
+            this.value = value;
         }
     }
 

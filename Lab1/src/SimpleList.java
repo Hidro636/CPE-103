@@ -5,7 +5,7 @@
  * @author Lucas Robertson
  * @version Lab 1
  */
-public interface SimpleList {
+public interface SimpleList<T> {
 
     /**
      * Inserts the specified element at the specified position in this list.
@@ -15,7 +15,7 @@ public interface SimpleList {
      * @param index the index at which the element is to be inserted
      * @param element the element to be inserted
      */
-    <T> void add(int index, T element);
+    void add(int index, T element);
 
     /**
      * Appends the specified element to the end of this list. Allows null
@@ -23,7 +23,7 @@ public interface SimpleList {
      *
      * @param element the element to be appended to this list
      */
-    <T> void add(T element);
+    void add(T element);
 
     /**
      * Returns the element at the specified position in this list
@@ -33,7 +33,7 @@ public interface SimpleList {
      * @throws IndexOutOfBoundsException if the index is less than zero or
      * greater than or equal to the size() of the list
      */
-    <T> T get(int index) throws IndexOutOfBoundsException;
+     T get(int index) throws IndexOutOfBoundsException;
 
     /**
      * Removes the element at the specified index in this list. Shifts any
@@ -43,7 +43,7 @@ public interface SimpleList {
      * @return the element previously at the specified position (that was just removed)
      * @throws IndexOutOfBoundsException  if the index is less than zero or greater than or equal to the size() of the list
      */
-    <T> T remove(int index) throws IndexOutOfBoundsException;
+    T remove(int index) throws IndexOutOfBoundsException;
 
     /**
      * Returns the number of elements in this list (elements that have been added by the creator/user of the list).
