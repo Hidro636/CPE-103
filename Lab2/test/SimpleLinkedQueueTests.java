@@ -8,12 +8,12 @@ import static org.junit.Assert.*;
  * @author Lucas Robertson
  * @version Lab 2
  */
-public class SimpleLinkedQueueTest {
+public class SimpleLinkedQueueTests {
 
     /**
      * Test constructor
      */
-    public SimpleLinkedQueueTest() {
+    public SimpleLinkedQueueTests() {
     }
 
     /**
