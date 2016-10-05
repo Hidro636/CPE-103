@@ -101,33 +101,46 @@ public class CircularQueueTest {
      * enqueue/dequeue situations
      */
     @Test
-    public void testQuantity() {
+    public void testMisc() {
         System.out.println("Testing misc...");
         CircularQueue instance = new CircularQueue();
         Object expResult, result;
 
-        for (int i = 0; i < 100; i++) {
-            instance.enqueue("Test: " + i);
+        for (int i = 0; i < 1000000; i++) {
+            instance.enqueue(i);
         }
 
-        expResult = 100;
+        for (int i = 0; i < 999999; i++) {
+            instance.dequeue();
+        }
+
+        expResult = 1;
         result = instance.size();
         assertEquals(expResult, result);
 
-        for (int i = 0; i < 95; i++) {
+        instance = new CircularQueue();
+
+        instance.enqueue(1);
+        instance.enqueue(2);
+        instance.enqueue(3);
+        instance.enqueue(4);
+        instance.enqueue(5);
+        instance.enqueue(6);
+        instance.enqueue(7);
+        instance.enqueue(8);
+        instance.enqueue(9);
+
+        expResult = 1;
+        result = instance.dequeue();
+        assertEquals(expResult, result);
+
+        for (int i = 0; i < 4; i++) {
             instance.dequeue();
         }
 
         expResult = 5;
-        result = instance.size();
-        assertEquals(expResult, result);
-
-        expResult = "Test: 4";
-        System.out.println(instance.dequeue());
         result = instance.dequeue();
-        
         assertEquals(expResult, result);
-        
 
     }
 

@@ -38,6 +38,10 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public T dequeue() throws NoSuchElementException {
+        if (this.size == 0) {
+            throw new NoSuchElementException("The queue is empty!");
+        }
+
         T value = arr[dIndex];
         dIndex = (dIndex + 1) % arr.length;
         size--;
@@ -46,9 +50,10 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public void enqueue(T element) {
-        if (size() == arr.length) {
+        if (size() + 1 == arr.length) {
             resize();
         }
+
         arr[eIndex] = element;
         eIndex = (eIndex + 1) % arr.length;
         size++;
@@ -73,6 +78,15 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         T[] larger = (T[]) new Object[arr.length * 2];
         System.arraycopy(arr, 0, larger, 0, arr.length);
         arr = larger;
+    }
+
+    public void _testDiagnosticPrint() {
+        System.out.print("Array: ");
+        for (Object o : arr) {
+            System.out.print(o + " ");
+        }
+        System.out.println("\neIndex: " + eIndex);
+        System.out.println("dIndex: " + dIndex);
     }
 
     private static class MyException extends Exception {
