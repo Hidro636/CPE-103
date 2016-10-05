@@ -21,13 +21,22 @@ public class CircularQueueTest {
      */
     @Test
     public void testDequeue() {
-        System.out.println("dequeue");
+        System.out.println("Testing dequeue()...");
         CircularQueue instance = new CircularQueue();
-        Object expResult = null;
+        
+        instance.enqueue(1);
+        instance.enqueue(2);
+        instance.enqueue(3);
+        
+        Object expResult = 1;
         Object result = instance.dequeue();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        expResult = 3;
+        instance.dequeue();
+        instance.enqueue(4);
+        result = instance.dequeue();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -43,10 +52,6 @@ public class CircularQueueTest {
         Object result = instance.size();
         Object expResult = 1;
         assertEquals(expResult, result);
-        
-        instance.enqueue("Phil");
-
-        printArray(instance.unusualMethodForTestingPurposesOnly());
     }
 
     /**
@@ -54,13 +59,22 @@ public class CircularQueueTest {
      */
     @Test
     public void testPeek() {
-        System.out.println("peek");
+        System.out.println("Testing peek()...");
         CircularQueue instance = new CircularQueue();
-        Object expResult = null;
+        
+        instance.enqueue(3);
+        instance.enqueue(2);
+        instance.enqueue(1);
+        
+        
+        Object expResult = 3;
         Object result = instance.peek();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        expResult = 3;
+        result = instance.size();
+        assertEquals(expResult, result);
+        
     }
 
     /**
@@ -68,17 +82,23 @@ public class CircularQueueTest {
      */
     @Test
     public void testSize() {
-        System.out.println("size");
+        System.out.println("Testing size()...");
         CircularQueue instance = new CircularQueue();
-        int expResult = 0;
+        instance.enqueue(1);
+        instance.enqueue(2);
+        int expResult = 2;
         int result = instance.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.dequeue();
+        expResult = 1;
+        result = instance.size();
+        assertEquals(expResult, result);
+
     }
 
-    private void printArray(Object[] arr) {
-        for (Object o : arr) {
+    private void printArray(CircularQueue instance) {
+        for (Object o : instance.unusualMethodForTestingPurposesOnly()) {
             System.out.print(o + " ");
         }
         System.out.println();
