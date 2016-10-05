@@ -23,15 +23,15 @@ public class CircularQueueTest {
     public void testDequeue() {
         System.out.println("Testing dequeue()...");
         CircularQueue instance = new CircularQueue();
-        
+
         instance.enqueue(1);
         instance.enqueue(2);
         instance.enqueue(3);
-        
+
         Object expResult = 1;
         Object result = instance.dequeue();
         assertEquals(expResult, result);
-        
+
         expResult = 3;
         instance.dequeue();
         instance.enqueue(4);
@@ -61,20 +61,19 @@ public class CircularQueueTest {
     public void testPeek() {
         System.out.println("Testing peek()...");
         CircularQueue instance = new CircularQueue();
-        
+
         instance.enqueue(3);
         instance.enqueue(2);
         instance.enqueue(1);
-        
-        
+
         Object expResult = 3;
         Object result = instance.peek();
         assertEquals(expResult, result);
-        
+
         expResult = 3;
         result = instance.size();
         assertEquals(expResult, result);
-        
+
     }
 
     /**
@@ -97,7 +96,43 @@ public class CircularQueueTest {
 
     }
 
+    /**
+     * Test adding and removing large quantities of values, as well as unique
+     * enqueue/dequeue situations
+     */
+    @Test
+    public void testQuantity() {
+        System.out.println("Testing misc...");
+        CircularQueue instance = new CircularQueue();
+        Object expResult, result;
+
+        for (int i = 0; i < 100; i++) {
+            instance.enqueue("Test: " + i);
+        }
+
+        expResult = 100;
+        result = instance.size();
+        assertEquals(expResult, result);
+
+        for (int i = 0; i < 95; i++) {
+            instance.dequeue();
+        }
+
+        expResult = 5;
+        result = instance.size();
+        assertEquals(expResult, result);
+
+        expResult = "Test: 4";
+        System.out.println(instance.dequeue());
+        result = instance.dequeue();
+        
+        assertEquals(expResult, result);
+        
+
+    }
+
     private void printArray(CircularQueue instance) {
+        System.out.print("Array: ");
         for (Object o : instance.unusualMethodForTestingPurposesOnly()) {
             System.out.print(o + " ");
         }

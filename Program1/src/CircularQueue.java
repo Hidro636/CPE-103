@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public class CircularQueue<T> implements SimpleQueue<T> {
 
     private T[] arr;
-    private int dIndex, eIndex;
+    private int dIndex, eIndex, size;
     static int INITIAL_LENGTH = 10;
 
     /**
@@ -21,7 +21,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     public CircularQueue() {
         //this(INITIAL_LENGTH);
         arr = (T[]) new Object[INITIAL_LENGTH];
-        dIndex = eIndex = 0;
+        dIndex = eIndex = size = 0;
     }
 
     /**
@@ -40,6 +40,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     public T dequeue() throws NoSuchElementException {
         T value = arr[dIndex];
         dIndex = (dIndex + 1) % arr.length;
+        size--;
         return value;
     }
 
@@ -50,7 +51,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         }
         arr[eIndex] = element;
         eIndex = (eIndex + 1) % arr.length;
-
+        size++;
     }
 
     @Override
@@ -60,20 +61,18 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public int size() {
-        return eIndex - dIndex;
+        //return eIndex - dIndex;
+        return size;
     }
 
     public Object[] unusualMethodForTestingPurposesOnly() {
         return arr;
     }
-    
+
     private void resize() {
         T[] larger = (T[]) new Object[arr.length * 2];
-            for (int i = 0; i < arr.length; i++) {
-                larger[i] = arr[i];
-            }
-
-            arr = larger;
+        System.arraycopy(arr, 0, larger, 0, arr.length);
+        arr = larger;
     }
 
     private static class MyException extends Exception {
