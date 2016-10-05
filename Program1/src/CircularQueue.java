@@ -6,12 +6,13 @@ import java.util.NoSuchElementException;
  *
  * @author Lucas Robertson
  * @version Program 1
+ * @param <T> The generic type of the queue
  */
 public class CircularQueue<T> implements SimpleQueue<T> {
 
     private T[] arr;
-    private int back;
-    private int front;
+    private int dIndex;
+    private int eIndex;
     static int INITIAL_LENGTH = 10;
     private int size;
 
@@ -23,6 +24,8 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         //this(INITIAL_LENGTH);
         arr = (T[]) new Object[INITIAL_LENGTH];
         size = 0;
+        dIndex = 0;
+        eIndex = 0;
     }
 
     /**
@@ -40,17 +43,15 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public T dequeue() throws NoSuchElementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void enqueue(T element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public T peek() throws NoSuchElementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -58,7 +59,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         return this.size;
     }
 
-    public T[] unusualMethodForTestingPurposesOnly() {
+    public Object[] unusualMethodForTestingPurposesOnly() {
         return arr;
     }
 
