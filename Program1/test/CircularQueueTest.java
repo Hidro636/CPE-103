@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -138,10 +132,28 @@ public class CircularQueueTest {
             instance.dequeue();
         }
 
-        expResult = 5;
+        expResult = 6;
         result = instance.dequeue();
         assertEquals(expResult, result);
 
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+
+        expResult = 0;
+        result = instance.size();
+        assertEquals(expResult, result);
+
+        instance.enqueue(3);
+        instance.enqueue(1);
+        instance.enqueue(12);
+        for(int i = 0; i < 20; i++) {
+            instance.enqueue(i);
+        }
+        
+        expResult = 3;
+        result = instance.dequeue();
+        assertEquals(expResult, result);
     }
 
     private void printArray(CircularQueue instance) {

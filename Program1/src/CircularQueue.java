@@ -43,6 +43,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         }
 
         T value = arr[dIndex];
+        arr[dIndex] = null;
         dIndex = (dIndex + 1) % arr.length;
         size--;
         return value;
@@ -50,7 +51,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public void enqueue(T element) {
-        if (size() + 1 == arr.length) {
+        if (size() == arr.length) {
             resize();
         }
 
@@ -80,16 +81,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         arr = larger;
     }
 
-    public void _testDiagnosticPrint() {
-        System.out.print("Array: ");
-        for (Object o : arr) {
-            System.out.print(o + " ");
-        }
-        System.out.println("\neIndex: " + eIndex);
-        System.out.println("dIndex: " + dIndex);
-    }
-
-    private static class MyException extends Exception {
+    public static class MyException extends RuntimeException {
 
         public MyException() {
         }
