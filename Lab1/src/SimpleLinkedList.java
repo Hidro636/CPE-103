@@ -25,7 +25,7 @@ public class SimpleLinkedList<T> implements SimpleList<T> {
 
     @Override
     public void add(int index, T element) {
-        if (index < 0 || ((size == 0 && index != 0) || (index >= size && size != 0))) {
+        if (index < 0 || ((size == 0 && index != 0) || (size != 0 && index >= size)) {
             throw new IndexOutOfBoundsException();
         }
 
