@@ -33,6 +33,10 @@ public class CircularQueue<T> implements SimpleQueue<T> {
      * CircularQueue(int initialCapacity).
      */
     public CircularQueue(int initialCapacity) throws MyException {
+        if(initialCapacity <= 0) {
+            throw new MyException();
+        }
+        
         arr = (T[]) new Object[initialCapacity];
     }
 
@@ -51,13 +55,15 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public void enqueue(T element) {
-        if (size() == arr.length) {
-            resize();
-        }
+        
 
         arr[eIndex] = element;
         eIndex = (eIndex + 1) % arr.length;
         size++;
+        
+        if (size() + 1  == arr.length) {
+            resize();
+        }
     }
 
     @Override
@@ -71,13 +77,15 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         return size;
     }
 
-    public Object[] unusualMethodForTestingPurposesOnly() {
+    public Object[] unusualMethodForTestingPurposesOnly() { //why?
         return arr;
     }
 
     private void resize() {
         T[] larger = (T[]) new Object[arr.length * 2];
-        System.arraycopy(arr, 0, larger, 0, arr.length);
+        for (int i = 0; i < arr.length; i++) {
+            larger[i] = arr[i];
+        }
         arr = larger;
     }
 

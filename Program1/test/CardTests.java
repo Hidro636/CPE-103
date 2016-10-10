@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
  * @author Lucas Robertson
  * @version Program 1
  */
-public class CardTest {
+public class CardTests {
 
-    public CardTest() {
+    public CardTests() {
     }
 
     /**

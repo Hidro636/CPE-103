@@ -1,3 +1,4 @@
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -5,9 +6,9 @@ import static org.junit.Assert.*;
  *
  * @author liblabs-user
  */
-public class CircularQueueTest {
+public class CircularQueueTests {
 
-    public CircularQueueTest() {
+    public CircularQueueTests() {
     }
 
     /**
@@ -90,6 +91,44 @@ public class CircularQueueTest {
 
     }
 
+    @Test
+    public void testLargeEnqueueDequeue() {
+        System.out.println("Testing resizing...");
+        CircularQueue instance = new CircularQueue(5);
+        Object expResult, result;
+
+        for (int i = 0; i < 50; i++) {
+            instance.enqueue(i);
+        }
+        
+        expResult = 50;
+        result = instance.size();
+        assertEquals(expResult, result);
+        
+        for (int i = 0; i < 25; i++) {
+            instance.dequeue();
+        }
+        
+        expResult = 25;
+        result = instance.size();
+        assertEquals(expResult, result);
+        
+        result = instance.dequeue();
+        assertEquals(expResult, result);
+        
+        for (int i = 0; i < 200; i++) {
+            instance.enqueue(i);
+        }
+        
+        for (int i = 0; i < 210; i++) {
+            instance.dequeue();
+        }
+        
+        expResult = 14;
+        result = instance.size();
+        assertEquals(expResult, result);
+    }
+
     /**
      * Test adding and removing large quantities of values, as well as unique
      * enqueue/dequeue situations
@@ -147,13 +186,9 @@ public class CircularQueueTest {
         instance.enqueue(3);
         instance.enqueue(1);
         instance.enqueue(12);
-        for(int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             instance.enqueue(i);
         }
-        
-        expResult = 3;
-        result = instance.dequeue();
-        assertEquals(expResult, result);
     }
 
     private void printArray(CircularQueue instance) {

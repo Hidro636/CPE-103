@@ -1,4 +1,8 @@
 
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Random;
+
 /**
  * A representation of a standard 52 card deck.
  *
@@ -9,8 +13,7 @@ public class Deck extends CircularQueue<Card> {
 
     public Deck(boolean shuffle) throws MyException {
         super(52);
-        
-        
+
         for (int s = 1; s <= 4; s++) {
             for (int r = 1; r <= 13; r++) {
                 this.enqueue(new Card(r, s));
@@ -18,15 +21,58 @@ public class Deck extends CircularQueue<Card> {
         }
 
         if (shuffle) {
-            this.shuffle();
+            shuffle();
         }
     }
 
     public Card draw() {
+        if(this.size() == 0) {
+            throw new NoSuchElementException("The deck is empty!");
+        }
+        
         return this.dequeue();
     }
 
     public void shuffle() {
+        Random r = new Random();
+
+        //Shuffling 100 times for the sake of being thorough
+        for (int c = 0; c < 100; c++) {
+
+            //Using normal distribution to simulate splitting *near* the middle of the deck
+            //26 is the mean (middle of deck), guesstimating stdv to be 3 cards?
+            int location = new Double(r.nextGaussian() * 2 + 25).intValue();
+
+            //"Splitting" the deck
+            CircularQueue<Card> halfA = new CircularQueue<>();
+            CircularQueue<Card> halfB = new CircularQueue<>();
+            for (int i = 0; i < location; i++) {
+                halfA.enqueue(this.dequeue());
+            }
+            for (int i = location; i < 52 - location; i++) {
+                halfB.enqueue(this.dequeue());
+            }
+
+            // Simlulating each half being shuffled back into the deck, sometimes multiple cards fall at once 
+            // Normal distribution again, but positive values only
+            int cardCount;
+            while (this.size() < 52) {
+                cardCount = new Double(Math.abs(r.nextGaussian() * 2 + 2)).intValue();
+                for (int i = 0; i < cardCount; i++) {
+                    if (halfA.size() > 0) {
+                        this.enqueue(halfA.dequeue());
+                    }
+                }
+
+                cardCount = new Double(Math.abs(r.nextGaussian() * 2 + 2)).intValue();
+                for (int i = 0; i < cardCount; i++) {
+                    if (halfB.size() > 0) {
+                        this.enqueue(halfB.dequeue());
+                    }
+                }
+            }
+
+        }
 
     }
 
