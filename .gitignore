@@ -2,3 +2,7 @@
 /Lab2/build/
 /Program1/build/
 *.class
+/Lab1/src/*Test.java
+/Lab1/src/*Tests.java
+/Program1/src/*Test.java
+/Program1/src/*Tests.java
