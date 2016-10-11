@@ -29,9 +29,8 @@ public class Hand {
             throw new NoSuchElementException("Deck is smaller than the hand size!");
         }
 
-        //initialize and shuffle deck
+        //initialize
         this.deck = deck;
-        this.deck.shuffle();
         this.hand = new ArrayList<>();
 
         //add cards to hand

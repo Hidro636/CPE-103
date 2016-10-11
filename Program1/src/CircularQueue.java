@@ -12,7 +12,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     private T[] arr;
     private int dIndex, eIndex, size;
-    static int INITIAL_LENGTH = 10;
+    public static final int INITIAL_LENGTH = 10;
 
     /**
      * Constructs an empty queue with an initial capacity given by
