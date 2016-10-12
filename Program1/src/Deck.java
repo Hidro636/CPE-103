@@ -11,14 +11,6 @@ import java.util.Random;
  */
 public class Deck extends CircularQueue<Card> {
 
-    public static void main(String[] args) {
-        Deck d = new Deck(false);
-
-        while (d.size() > 0) {
-            System.out.println(d.draw());
-        }
-    }
-
     public Deck(boolean shuffle) throws MyException {
         super(52);
 
