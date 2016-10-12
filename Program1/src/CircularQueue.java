@@ -33,10 +33,10 @@ public class CircularQueue<T> implements SimpleQueue<T> {
      * CircularQueue(int initialCapacity).
      */
     public CircularQueue(int initialCapacity) throws MyException {
-        if(initialCapacity <= 0) {
+        if (initialCapacity <= 0) {
             throw new MyException();
         }
-        
+
         arr = (T[]) new Object[initialCapacity];
     }
 
@@ -55,23 +55,26 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public void enqueue(T element) {
-        
 
         arr[eIndex] = element;
         eIndex = (eIndex + 1) % arr.length;
         size++;
-        
-        if (size() + 1  == arr.length) {
-            resize();
+
+        if (size() + 1 == arr.length) {
+            T[] larger = (T[]) new Object[arr.length * 2];
+            for (int i = 0; i < arr.length; i++) {
+                larger[i] = arr[i];
+            }
+            arr = larger;
         }
     }
 
     @Override
     public T peek() throws NoSuchElementException {
-        if(this.size == 0) {
+        if (this.size == 0) {
             throw new NoSuchElementException();
         }
-        
+
         return arr[dIndex];
     }
 
@@ -83,14 +86,6 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     public Object[] unusualMethodForTestingPurposesOnly() { //why?
         return arr;
-    }
-
-    private void resize() {
-        T[] larger = (T[]) new Object[arr.length * 2];
-        for (int i = 0; i < arr.length; i++) {
-            larger[i] = arr[i];
-        }
-        arr = larger;
     }
 
     public static class MyException extends RuntimeException {
