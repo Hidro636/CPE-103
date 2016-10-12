@@ -68,6 +68,10 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public T peek() throws NoSuchElementException {
+        if(this.size == 0) {
+            throw new NoSuchElementException();
+        }
+        
         return arr[dIndex];
     }
 
