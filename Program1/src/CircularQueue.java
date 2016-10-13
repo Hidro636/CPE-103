@@ -21,8 +21,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     public CircularQueue() {
         //this(INITIAL_LENGTH);
         arr = (T[]) new Object[INITIAL_LENGTH];
-        front = size = 0;
-        rear = -1;
+        front = rear = size = 0;
     }
 
     /**
@@ -43,14 +42,17 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public T dequeue() throws NoSuchElementException {
-        if (size == 0) {
+        if (this.size == 0) {
             throw new NoSuchElementException();
         } else {
-            front++;
             T value = arr[front];
-            if (front > arr.length - 1) {
+
+            if (front + 1 == arr.length) {
                 front = 0;
+            } else {
+                front++;
             }
+
             size--;
             return value;
         }
@@ -61,32 +63,25 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         if (size == arr.length) {
             resize();
         }
+
+        arr[rear] = element;
+
         rear++;
-        if (rear >= arr.length && size != arr.length) {
+
+        if (rear == arr.length) {
             rear = 0;
         }
-        arr[rear] = element;
         size++;
-
     }
 
     private void resize() {
-        T[] larger = (T[]) new Object[arr.length * 2];
-        int tmpFront = front;
-        int index = -1;
-        while (true) {
-            larger[++index] = this.arr[tmpFront];
-            tmpFront++;
-            if (tmpFront == arr.length) {
-                tmpFront = 0;
-            }
-            if (size == index + 1) {
-                break;
-            }
+        T[] temp = (T[]) new Object[arr.length * 2];
+        for (int i = 0; i < size; i++) {
+            temp[i] = arr[(front + i) % arr.length];
         }
-        arr = larger;
+        arr = temp;
         front = 0;
-        rear = index;
+        rear = size;
     }
 
     @Override
@@ -106,6 +101,14 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     public Object[] unusualMethodForTestingPurposesOnly() { //why?
         return arr;
+    }
+
+    public void debug() {
+        for (Object o : arr) {
+            System.out.println(o);
+        }
+        System.out.println("Front: " + front);
+        System.out.println("Rear: " + rear);
     }
 
     public static class MyException extends RuntimeException {
