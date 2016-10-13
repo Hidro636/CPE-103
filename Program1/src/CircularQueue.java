@@ -62,9 +62,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         size++;
         if (eIndex == this.size - 1) {
             T[] larger = (T[]) new Object[arr.length * 2];
-            for (int i = 0; i < arr.length; i++) {
-                larger[i] = arr[i];
-            }
+            System.arraycopy(arr, 0, larger, 0, arr.length);
             arr = larger;
         } else if (eIndex == arr.length - 1) {
             eIndex = 0;
