@@ -593,6 +593,7 @@ public class CircularQueueAcceptanceTests {
                 System.out.println("Not using size");
                 assertTrue(newSize == oldSize * 2 || newSize == oldSize * 2 - 1);
             } else {
+                System.out.println("WTF");
                 assertEquals(newSize, oldSize);
             }
         }
