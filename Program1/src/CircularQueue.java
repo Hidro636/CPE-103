@@ -35,22 +35,22 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     public CircularQueue(int initialCapacity) throws MyException {
         if (initialCapacity <= 0) {
             throw new MyException();
+        } else {
+            arr = (T[]) new Object[initialCapacity];
         }
-
-        arr = (T[]) new Object[initialCapacity];
     }
 
     @Override
     public T dequeue() throws NoSuchElementException {
         if (this.size == 0) {
-            throw new NoSuchElementException("The queue is empty!");
+            throw new NoSuchElementException();
+        } else {
+            T value = arr[dIndex];
+            arr[dIndex] = null;
+            dIndex = (dIndex + 1) % arr.length;
+            size--;
+            return value;
         }
-
-        T value = arr[dIndex];
-        arr[dIndex] = null;
-        dIndex = (dIndex + 1) % arr.length;
-        size--;
-        return value;
     }
 
     @Override
@@ -73,9 +73,9 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     public T peek() throws NoSuchElementException {
         if (this.size == 0) {
             throw new NoSuchElementException();
+        } else {
+            return arr[dIndex];
         }
-
-        return arr[dIndex];
     }
 
     @Override
