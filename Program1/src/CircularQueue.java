@@ -94,7 +94,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         if (this.size == 0) {
             throw new NoSuchElementException();
         } else {
-            return arr[dIndex];
+            return arr[front];
         }
     }
 
