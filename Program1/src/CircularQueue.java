@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public class CircularQueue<T> implements SimpleQueue<T> {
 
     private T[] arr;
-    private int dIndex, eIndex, size;
+    private int front, rear, size;
     public static final int INITIAL_LENGTH = 10;
 
     /**
@@ -21,7 +21,8 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     public CircularQueue() {
         //this(INITIAL_LENGTH);
         arr = (T[]) new Object[INITIAL_LENGTH];
-        dIndex = eIndex = size = 0;
+        front = size = 0;
+        rear = -1;
     }
 
     /**
@@ -42,17 +43,15 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public T dequeue() throws NoSuchElementException {
-        if (this.size == 0) {
+        if (size == 0) {
             throw new NoSuchElementException();
         } else {
-            T value = arr[dIndex];
-            if (dIndex == arr.length - 1) {
-                dIndex = 0;
-            } else {
-                dIndex++;
+            front++;
+            T value = arr[front];
+            if (front > arr.length - 1) {
+                front = 0;
             }
             size--;
-
             return value;
         }
     }
@@ -62,38 +61,32 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         if (size == arr.length) {
             resize();
         }
-
-        arr[eIndex] = element;
-        if (eIndex == arr.length) {
-            eIndex = 0;
-        } else {
-            eIndex++;
+        rear++;
+        if (rear >= arr.length && size != arr.length) {
+            rear = 0;
         }
+        arr[rear] = element;
         size++;
+
     }
 
     private void resize() {
         T[] larger = (T[]) new Object[arr.length * 2];
-        if (eIndex >= dIndex) {
-            for (int i = dIndex, h = 0; i < eIndex; i++, h++) {
-                larger[h] = arr[i];
+        int tmpFront = front;
+        int index = -1;
+        while (true) {
+            larger[++index] = this.arr[tmpFront];
+            tmpFront++;
+            if (tmpFront == arr.length) {
+                tmpFront = 0;
             }
-        } else {
-            int hFinal = 0;
-            for (int i = dIndex, h = 0; i < arr.length; i++, h++) {
-                larger[h] = arr[i];
-                hFinal = h;
+            if (size == index + 1) {
+                break;
             }
-
-            for (int i = 0, h = hFinal; i < eIndex; i++, h++) {
-                larger[h] = arr[i];
-            }
-
         }
-
         arr = larger;
-        eIndex = eIndex - dIndex;
-        dIndex = 0;
+        front = 0;
+        rear = index;
     }
 
     @Override
