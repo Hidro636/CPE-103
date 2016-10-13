@@ -38,10 +38,10 @@ public class Deck extends CircularQueue<Card> {
 
         //Shuffling 100 times for the sake of being thorough
         for (int c = 0; c < 100; c++) {
-
+            int initialSize = this.size();
             //Using normal distribution to simulate splitting *near* the middle of the deck
             //26 is the mean (middle of deck), guesstimating stdv to be 3 cards?
-            int location = new Double(r.nextGaussian() * 2 + (this.size() / 2)).intValue();
+            int location = new Double(r.nextGaussian() * 2 + (initialSize / 2)).intValue();
 
             //"Splitting" the deck
             CircularQueue<Card> halfA = new CircularQueue<>();
@@ -49,14 +49,13 @@ public class Deck extends CircularQueue<Card> {
             for (int i = 0; i < location; i++) {
                 halfA.enqueue(this.dequeue());
             }
-            for (int i = location; i < this.size() - location; i++) {
+            for (int i = location; i < initialSize - location; i++) {
                 halfB.enqueue(this.dequeue());
             }
 
             // Simlulating each half being shuffled back into the deck, sometimes multiple cards fall at once 
             // Normal distribution again, but positive values only
             int cardCount;
-            int initialSize = this.size();
             while (this.size() < initialSize) {
                 cardCount = new Double(Math.abs(r.nextGaussian() * 2 + 2)).intValue();
                 for (int i = 0; i < cardCount; i++) {
