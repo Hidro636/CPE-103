@@ -27,13 +27,17 @@ public class Deck extends CircularQueue<Card> {
 
     public Card draw() {
         if (this.size() == 0) {
-            throw new NoSuchElementException("The deck is empty!");
+            throw new NoSuchElementException();
         }
 
         return this.dequeue();
     }
 
     public void shuffle() {
+        if (this.size() == 0) {
+            return;
+        }
+
         Random r = new Random();
 
         //Shuffling 100 times for the sake of being thorough
