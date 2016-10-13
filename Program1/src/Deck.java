@@ -1,5 +1,4 @@
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -57,7 +56,8 @@ public class Deck extends CircularQueue<Card> {
             // Simlulating each half being shuffled back into the deck, sometimes multiple cards fall at once 
             // Normal distribution again, but positive values only
             int cardCount;
-            while (this.size() < 52) {
+            int initialSize = this.size();
+            while (this.size() < initialSize) {
                 cardCount = new Double(Math.abs(r.nextGaussian() * 2 + 2)).intValue();
                 for (int i = 0; i < cardCount; i++) {
                     if (halfA.size() > 0) {
