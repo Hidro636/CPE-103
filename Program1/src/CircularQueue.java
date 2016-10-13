@@ -59,6 +59,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     @Override
     public void enqueue(T element) {
+        size++;
         if (eIndex == this.size - 1) {
             T[] larger = (T[]) new Object[arr.length * 2];
             for (int i = 0; i < arr.length; i++) {
@@ -71,7 +72,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
         arr[eIndex] = element;
         eIndex++;
-        size++;
+        
     }
 
     @Override
