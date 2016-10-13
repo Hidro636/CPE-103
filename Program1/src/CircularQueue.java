@@ -46,7 +46,7 @@ public class CircularQueue<T> implements SimpleQueue<T> {
             throw new NoSuchElementException();
         } else {
             T value = arr[dIndex];
-            arr[dIndex] = null;
+            //arr[dIndex] = null;
             dIndex = (dIndex + 1) % arr.length;
             size--;
             return value;
