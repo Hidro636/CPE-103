@@ -47,7 +47,10 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         } else {
             T value = arr[dIndex];
             //arr[dIndex] = null;
-            dIndex = (dIndex + 1) % arr.length;
+            dIndex++;
+            if (dIndex == arr.length) {
+                dIndex = 0;
+            }
             size--;
             return value;
         }
@@ -64,9 +67,11 @@ public class CircularQueue<T> implements SimpleQueue<T> {
         }
 
         arr[eIndex] = element;
-        eIndex = (eIndex + 1) % arr.length;
+        eIndex++;
+        if (eIndex == arr.length) {
+            eIndex = 0;
+        }
         size++;
-
     }
 
     @Override

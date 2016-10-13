@@ -586,14 +586,11 @@ public class CircularQueueAcceptanceTests {
 
             if (usingSize && qSize == oldSize) // Size should have doubled
             {
-                System.out.println("Using size");
                 assertEquals(newSize, oldSize * 2);
             } else if (!usingSize && qSize == oldSize - 1) // Size should double or double - 1
             {
-                System.out.println("Not using size");
                 assertTrue(newSize == oldSize * 2 || newSize == oldSize * 2 - 1);
             } else {
-                System.out.println("WTF");
                 assertEquals(newSize, oldSize);
             }
         }
