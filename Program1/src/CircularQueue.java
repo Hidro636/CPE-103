@@ -46,31 +46,31 @@ public class CircularQueue<T> implements SimpleQueue<T> {
             throw new NoSuchElementException();
         } else {
             T value = arr[dIndex];
-            //arr[dIndex] = null;
-            dIndex++;
-            if (dIndex == arr.length) {
+            if (dIndex == arr.length - 1) {
                 dIndex = 0;
+            } else {
+                dIndex++;
             }
             size--;
+
             return value;
         }
     }
 
     @Override
     public void enqueue(T element) {
-        if (this.size == arr.length) {
+        if (eIndex == this.size - 1) {
             T[] larger = (T[]) new Object[arr.length * 2];
             for (int i = 0; i < arr.length; i++) {
                 larger[i] = arr[i];
             }
             arr = larger;
+        } else if (eIndex == arr.length - 1) {
+            eIndex = 0;
         }
 
         arr[eIndex] = element;
         eIndex++;
-        if (eIndex == arr.length) {
-            eIndex = 0;
-        }
         size++;
     }
 
