@@ -32,8 +32,9 @@ public class SimpleArrayStack<T> implements SimpleStack<T> {
         if (size == 0) {
             throw new NoSuchElementException();
         } else {
+            T value = values[size - 1];
             size--;
-            return values[size - 1];
+            return value;
         }
     }
 
