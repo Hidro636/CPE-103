@@ -34,7 +34,6 @@ public class Deck extends CircularQueue<Card> {
     }
 
     public void shuffle() {
-        System.out.println(this.size());
 
         Random r = new Random();
 
