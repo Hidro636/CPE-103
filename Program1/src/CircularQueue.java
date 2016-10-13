@@ -75,11 +75,12 @@ public class CircularQueue<T> implements SimpleQueue<T> {
     }
 
     private void resize() {
-        T[] temp = (T[]) new Object[arr.length * 2];
+        T[] larger = (T[]) new Object[arr.length * 2];
+
         for (int i = 0; i < size; i++) {
-            temp[i] = arr[(front + i) % arr.length];
+            larger[i] = arr[(front + i) % arr.length];
         }
-        arr = temp;
+        arr = larger;
         front = 0;
         rear = size;
     }
@@ -101,14 +102,6 @@ public class CircularQueue<T> implements SimpleQueue<T> {
 
     public Object[] unusualMethodForTestingPurposesOnly() { //why?
         return arr;
-    }
-
-    public void debug() {
-        for (Object o : arr) {
-            System.out.println(o);
-        }
-        System.out.println("Front: " + front);
-        System.out.println("Rear: " + rear);
     }
 
     public static class MyException extends RuntimeException {
