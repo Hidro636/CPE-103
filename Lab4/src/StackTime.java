@@ -50,20 +50,15 @@ public class StackTime {
         ArrayList<Long> times = new ArrayList<>();
         long end;
         long start;
-        long diff;
-        for (int t = 0; t < 100; t++) {
-            start = System.currentTimeMillis();
-            for (int i = 0; i < n; i++) {
-                stack.push(i);
-            }
-            end = System.currentTimeMillis();
-            diff = end - start;
-            times.add(diff);
-            System.out.print("\rRunnig push test: " + t + " iterations, current average time: " + avg(times) + " ms");
+
+        for (int i = 0; i < n; i++) {
+            start = System.nanoTime();
+            stack.push(i);
+            end = System.nanoTime();
+            times.add(end - start);
         }
 
-        double avg = avg(times);
-        System.out.println("\nRunning O(1) Push test over " + n + " iterations: " + avg + "ms (average of 100 tests)");
+        System.out.println("Running O(1) Push test over " + n + " iterations: " + avg(times) + "ns (average)");
 
     }
 
