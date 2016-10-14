@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 /**
  *
  * @author Lucas Robertson
- * @version Lab 3
+ * @version Lab 4
  * @param <T> The generic type of the stack
  */
 public class BadStack<T> implements SimpleStack<T> {

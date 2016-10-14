@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * The command-line processing is provided. You must complete the timing code.
  *
  * @author Brian Jones
+ * @author Lucas Robertson
  * @version 10/1/2016 - CPE 103 Lab 4
  */
 public class StackTime {

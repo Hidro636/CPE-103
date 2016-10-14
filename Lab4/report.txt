@@ -1,10 +1,33 @@
+Lucas Robertson
+Lab 4
 
 N=10    O(1) Push       O(1) Pop        O(N) Push       O(N) Pop
 ================================================================
-1   |   
-N   |
-2N  |
-4N  |
-16N |
-32N |
-64N |
+1   |   13899ns         7333ns          13270ns         7613ns
+N   |   2395ns          1459ns          3694ns          2018ns
+2N  |   1718ns          1019ns          3041ns          2489ns
+4N  |   1232ns          1021ns          4345ns          3264ns
+16N |   1391ns          945ns           4988ns          5776ns
+32N |   1391ns          924ns           4693ns          6705ns
+64N |   1407ns          928ns           5554ns          9945ns
+BIGN|   607ns           596ns           73880ns         79246ns
+
+
+Remarks:
+    Building the tests themselves was pretty straightforward, but there was a 
+lot of natural variation in the times of single push and pop operations on both 
+the BadStack and our previous O(1) stack. As a result, it was necessary to use 
+the average values of each push/pop over N trials as opposed to just the single 
+time for each operation.
+
+    Interestingly, the O(1) push operation had the longest run time for a single
+operation, and then spiked at 10 operations due to the first resizing of the 
+array (although it did not affect the average time too much). As expected, the
+O(1) values approached a lower, constant value as the impact on timing by 
+external sources became less of a factor. It may be beneficial to run the
+desired operation for a while before beginning timing to help clear out some of
+initial long time issues. Both O(1) operations seemed to approach 600ns (running
+on the unix servers). The O(N) operations increased, as expected, as well. Apart
+from a decrease initially (again, due to reasons not factored into the timing
+setup), their times grew linearly like they should. Again, both approached the
+same value as the array grew in size, which was about 75000ns/operation.
