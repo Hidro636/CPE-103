@@ -31,3 +31,7 @@ on the unix servers). The O(N) operations increased, as expected, as well. Apart
 from a decrease initially (again, due to reasons not factored into the timing
 setup), their times grew linearly like they should. Again, both approached the
 same value as the array grew in size, which was about 75000ns/operation.
+
+    There wasn't much out of the ordinary- long times for low numbers of
+iterations is expected, and everything grew or decreased in the way that they
+should have.
