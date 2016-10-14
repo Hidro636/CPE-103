@@ -63,15 +63,59 @@ public class StackTime {
     }
 
     private static void runOrder1PopTest(int n) {
-        System.out.println("TODO: Develop timing test and report results!");
+        SimpleArrayStack<Integer> stack = new SimpleArrayStack<>();
+        ArrayList<Long> times = new ArrayList<>();
+        long end;
+        long start;
+
+        for (int i = 0; i < n; i++) {
+            stack.push(i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            start = System.nanoTime();
+            stack.pop();
+            end = System.nanoTime();
+            times.add(end - start);
+        }
+
+        System.out.println("Running O(1) Pop test over " + n + " iterations: " + avg(times) + "ns (average)");
     }
 
     private static void runOrderNPushTest(int n) {
-        System.out.println("TODO: Develop timing test and report results!");
+        BadStack<Integer> stack = new BadStack<>();
+        ArrayList<Long> times = new ArrayList<>();
+        long end;
+        long start;
+
+        for (int i = 0; i < n; i++) {
+            start = System.nanoTime();
+            stack.push(i);
+            end = System.nanoTime();
+            times.add(end - start);
+        }
+
+        System.out.println("Running O(N) Push test over " + n + " iterations: " + avg(times) + "ns (average)");
     }
 
     private static void runOrderNPopTest(int n) {
-        System.out.println("TODO: Develop timing test and report results!");
+        BadStack<Integer> stack = new BadStack<>();
+        ArrayList<Long> times = new ArrayList<>();
+        long end;
+        long start;
+
+        for (int i = 0; i < n; i++) {
+            stack.push(i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            start = System.nanoTime();
+            stack.pop();
+            end = System.nanoTime();
+            times.add(end - start);
+        }
+
+        System.out.println("Running O(N) Pop test over " + n + " iterations: " + avg(times) + "ns (average)");
     }
 
     private static void verifyCommandLine(String[] args) {
