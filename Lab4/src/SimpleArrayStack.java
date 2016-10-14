@@ -7,12 +7,12 @@ import java.util.NoSuchElementException;
  * @version Lab 3
  * @param <T> The generic type of the stack
  */
-public class BadStack<T> implements SimpleStack<T> {
+public class SimpleArrayStack<T> implements SimpleStack<T> {
 
     private T[] values;
     private int size;
 
-    public BadStack() {
+    public SimpleArrayStack() {
         this.values = (T[]) new Object[10];
         this.size = 0;
     }
@@ -22,7 +22,7 @@ public class BadStack<T> implements SimpleStack<T> {
         if (size == 0) {
             throw new NoSuchElementException();
         } else {
-            return values[0];
+            return values[size - 1];
         }
 
     }
@@ -32,13 +32,7 @@ public class BadStack<T> implements SimpleStack<T> {
         if (size == 0) {
             throw new NoSuchElementException();
         } else {
-            T value = values[0];
-            T[] newValues = (T[]) new Object[values.length - 1];
-            for (int i = 1; i < values.length; i++) {
-                newValues[i - 1] = values[i];
-            }
-
-            values = newValues;
+            T value = values[size - 1];
             size--;
             return value;
         }
@@ -47,16 +41,17 @@ public class BadStack<T> implements SimpleStack<T> {
     @Override
     public void push(T element) {
 
-        //Resize every time because we can
-        T[] newValues = (T[]) new Object[values.length + 1];
-        newValues[0] = element;
-        for (int i = 0; i < values.length; i++) {
-            newValues[i + 1] = values[i];
+        //Resize if needed
+        if (size == values.length) {
+            T[] larger = (T[]) new Object[values.length * 2];
+            for (int i = 0; i < values.length; i++) {
+                larger[i] = values[i];
+            }
+            values = larger;
         }
 
-        values = newValues;
+        values[size] = element;
         size++;
-
     }
 
     @Override
