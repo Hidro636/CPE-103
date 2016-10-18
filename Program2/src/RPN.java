@@ -41,7 +41,7 @@ public class RPN {
             String value;
 
             while (read.hasNext()) {
-                value = read.next();
+                value = read.next().trim();
                 switch (value) {
                     case "+":
                         stack.push((double) stack.pop() + (double) stack.pop());
@@ -83,7 +83,7 @@ public class RPN {
 
         String value;
         while (read.hasNext()) {
-            value = read.next();
+            value = read.next().trim();
             switch (value) {
                 case "*":
                 case "/":
