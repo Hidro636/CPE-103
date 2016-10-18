@@ -42,6 +42,11 @@ public class RPN {
 
             while (read.hasNext()) {
                 value = read.next().trim();
+
+                if (value.equals("")) {
+                    continue;
+                }
+
                 switch (value) {
                     case "+":
                         stack.push((double) stack.pop() + (double) stack.pop());
