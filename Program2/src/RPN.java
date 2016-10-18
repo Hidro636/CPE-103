@@ -87,7 +87,6 @@ public class RPN {
             switch (value) {
                 case "*":
                 case "/":
-                    //printStack(stack);
                     while (stack.size() > 0 && !(stack.peek().equals("+") || stack.peek().equals("-") || stack.peek().equals("("))) {
                         expression += stack.pop() + " ";
                     }
@@ -96,7 +95,6 @@ public class RPN {
 
                 case "+":
                 case "-":
-                    //printStack(stack);
                     while (stack.size() > 0 && !stack.peek().equals("(")) {
                         expression += stack.pop() + " ";
                     }
@@ -126,11 +124,5 @@ public class RPN {
         }
 
         return expression.trim();
-    }
-
-    private static void printStack(SimpleLinkedStack stack) {
-        while (stack.size() > 0) {
-            System.out.print(stack.pop() + " ");
-        }
     }
 }
