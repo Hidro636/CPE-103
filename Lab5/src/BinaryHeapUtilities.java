@@ -22,7 +22,7 @@ public class BinaryHeapUtilities {
             throw new IllegalArgumentException();
         }
 
-        return (int) (Math.log(size) / Math.log(2));
+        return (int) (Math.log(size) / Math.log(2)); //logbase2(size)
     }
 
     /**
@@ -42,15 +42,8 @@ public class BinaryHeapUtilities {
      */
     public static <T extends Comparable< ? super T>> boolean isHeap(T[] heap, int size) {
         //make sure it's a valid heap and the 0 index is empty
-        if (heap[0] != null) {
+        if (heap[0] != null || size <= 0) {
             return false;
-        }
-
-        //Check that all elements past the specified size are null
-        for (int i = size + 1; i < heap.length; i++) {
-            if (heap[i] != null) {
-                return false;
-            }
         }
 
         //Check that each element's parent is less than it
@@ -103,7 +96,7 @@ public class BinaryHeapUtilities {
      * @throws IllegalArgumentException if the array is not a heap
      */
     public static <T extends Comparable<? super T>> T parentOf(int index, T[] heap, int size) {
-        if (index >= size) {
+        if (index <= 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         } else if (index / 2 < 1 || heap[index / 2] == null) {
             throw new NoSuchElementException();
