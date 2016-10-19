@@ -66,13 +66,11 @@ public class BinaryHeapUtilitiesTests {
     public void testLeftChildOf() {
         System.out.println("leftChildOf");
         int index = 0;
-        Comparable[] heap = null;
+        Comparable[] heap = new Integer[]{null, 7, 20, 7, 28, 72, 42, 80, 41, 41, 98, 74, 93};
         int size = 0;
         Object expResult = null;
         Object result = BinaryHeapUtilities.leftChildOf(index, heap, size);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
