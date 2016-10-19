@@ -41,6 +41,9 @@ public class BinaryHeap {
         Node value = arr[1];
         arr[1] = arr[size];
         arr[size] = null;
+
+        int index = 1;
+        return value;
     }
 
     public int size() {

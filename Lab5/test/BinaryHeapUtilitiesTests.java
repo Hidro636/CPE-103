@@ -23,12 +23,12 @@ public class BinaryHeapUtilitiesTests {
         int expResult = 0;
         int result = BinaryHeapUtilities.height(size);
         assertEquals(expResult, result);
-        
+
         size = 4;
         expResult = 2;
         result = BinaryHeapUtilities.height(size);
         assertEquals(expResult, result);
-        
+
         size = 16;
         expResult = 4;
         result = BinaryHeapUtilities.height(size);
@@ -40,14 +40,23 @@ public class BinaryHeapUtilitiesTests {
      */
     @Test
     public void testIsHeap() {
-        System.out.println("isHeap");
-        Comparable[] heap = null;
-        int size = 0;
-        boolean expResult = false;
+        System.out.println("Testing isHeap()...");
+        Comparable[] heap = new Integer[]{null, 7, 20, 7, 28, 72, 42, 80, 41, 41, 98, 74, 93};
+        int size = 12;
+        boolean expResult = true;
         boolean result = BinaryHeapUtilities.isHeap(heap, size);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        heap = new String[]{null, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"};
+        result = BinaryHeapUtilities.isHeap(heap, size);
+        assertEquals(expResult, result);
+
+        heap = new Integer[]{null, 5, 1, 2, 9, 11, 6, 8, 15, 19, 22, 31};
+        size = 11;
+        expResult = false;
+        result = BinaryHeapUtilities.isHeap(heap, size);
+        assertEquals(expResult, result);
+
     }
 
     /**
