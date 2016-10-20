@@ -1,4 +1,5 @@
 
+import java.util.NoSuchElementException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,7 +19,7 @@ public class BinaryHeapUtilitiesTests {
      */
     @Test
     public void testHeight() {
-        System.out.println("height");
+        System.out.println("Testing height()...");
         int size = 1;
         int expResult = 0;
         int result = BinaryHeapUtilities.height(size);
@@ -62,14 +63,27 @@ public class BinaryHeapUtilitiesTests {
     /**
      * Test of leftChildOf method, of class BinaryHeapUtilities.
      */
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void testLeftChildOf() {
-        System.out.println("leftChildOf");
-        int index = 0;
-        Comparable[] heap = new Integer[]{null, 7, 20, 7, 28, 72, 42, 80, 41, 41, 98, 74, 93};
-        int size = 0;
-        Object expResult = null;
+        System.out.println("Testing leftChildOf()...");
+        int index = 1;
+        Comparable[] heap = new Integer[]{null, 7, 20, 7, 28, 72, 42, 80, 41, 41, 98, 74, 43};
+        int size = 12;
+        Object expResult = 20;
         Object result = BinaryHeapUtilities.leftChildOf(index, heap, size);
+        assertEquals(expResult, result);
+
+        index = 6;
+        expResult = 43;
+        result = BinaryHeapUtilities.leftChildOf(index, heap, size);
+        assertEquals(expResult, result);
+
+        index = 7;
+        result = BinaryHeapUtilities.leftChildOf(index, heap, size);
+
+        index = 2;
+        expResult = 28;
+        result = BinaryHeapUtilities.leftChildOf(index, heap, size);
         assertEquals(expResult, result);
     }
 
@@ -78,31 +92,40 @@ public class BinaryHeapUtilitiesTests {
      */
     @Test
     public void testParentOf() {
-        System.out.println("parentOf");
-        int index = 0;
-        Comparable[] heap = null;
-        int size = 0;
-        Object expResult = null;
+        System.out.println("Testing parentOf()...");
+        int index = 2;
+        Comparable[] heap = new Integer[]{null, 7, 20, 7, 28, 72, 42, 80, 41, 41, 98, 74, 43};
+        int size = 12;
+        Object expResult = 7;
         Object result = BinaryHeapUtilities.parentOf(index, heap, size);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of rightChildOf method, of class BinaryHeapUtilities.
      */
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void testRightChildOf() {
-        System.out.println("rightChildOf");
-        int index = 0;
-        Comparable[] heap = null;
-        int size = 0;
-        Object expResult = null;
+        System.out.println("Testing rightChildOf()...");
+        int index = 1;
+        Comparable[] heap = new Integer[]{null, 7, 20, 7, 28, 72, 42, 80, 41, 41, 98, 74, 43};
+        int size = 12;
+        Object expResult = 7;
         Object result = BinaryHeapUtilities.rightChildOf(index, heap, size);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        index = 5;
+        expResult = 74;
+        result = BinaryHeapUtilities.rightChildOf(index, heap, size);
+        assertEquals(expResult, result);
+
+        index = 6;
+        result = BinaryHeapUtilities.rightChildOf(index, heap, size);
+
+        index = 2;
+        expResult = 72;
+        result = BinaryHeapUtilities.rightChildOf(index, heap, size);
+        assertEquals(expResult, result);
     }
 
 }

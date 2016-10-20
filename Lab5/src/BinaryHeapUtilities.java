@@ -70,9 +70,9 @@ public class BinaryHeapUtilities {
      * @throws IllegalArgumentException if the array is not a heap
      */
     public static <T extends Comparable<? super T>> T leftChildOf(int index, T[] heap, int size) {
-        if (index * 2 > size || index <= 0) {
+        if (index <= 0 || index > size) {
             throw new IndexOutOfBoundsException();
-        } else if (heap[index * 2] == null) {
+        } else if (index * 2 >= heap.length || heap[index * 2] == null) {
             throw new NoSuchElementException();
         } else if (!isHeap(heap, size)) {
             throw new IllegalArgumentException();
@@ -98,7 +98,7 @@ public class BinaryHeapUtilities {
     public static <T extends Comparable<? super T>> T parentOf(int index, T[] heap, int size) {
         if (index <= 0 || index > size) {
             throw new IndexOutOfBoundsException();
-        } else if (index / 2 < 1 || heap[index / 2] == null) {
+        } else if (index == 1) {
             throw new NoSuchElementException();
         } else if (!isHeap(heap, size)) {
             throw new IllegalArgumentException();
@@ -122,9 +122,9 @@ public class BinaryHeapUtilities {
      * @throws IllegalArgumentException if the array is not a heap
      */
     public static <T extends Comparable<? super T>> T rightChildOf(int index, T[] heap, int size) {
-        if ((index * 2) + 1 > size || index <= 0) {
+        if (index <= 0 || index > size) {
             throw new IndexOutOfBoundsException();
-        } else if (heap[(index * 2) + 1] == null) {
+        } else if ((index * 2) + 1 >= heap.length || heap[(index * 2) + 1] == null) {
             throw new NoSuchElementException();
         } else if (!isHeap(heap, size)) {
             throw new IllegalArgumentException();
