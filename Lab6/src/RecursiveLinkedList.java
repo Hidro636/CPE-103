@@ -110,6 +110,7 @@ public class RecursiveLinkedList<T> implements SimpleList<T> {
         return remove(index, head);
     }
 
+    // Private ALTERNATE recursive helper method for public get(index)
     private T remove(int index, Node node) {
         stackTrace = new Throwable();
 

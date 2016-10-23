@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
  *
  * @author liblabs-user
  */
-public class RecursiveLinkedListTest {
+public class RecursiveLinkedListTests {
 
-    public RecursiveLinkedListTest() {
+    public RecursiveLinkedListTests() {
     }
 
     /**
