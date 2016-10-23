@@ -52,12 +52,33 @@ public class RecursiveLinkedList<T> implements SimpleList<T> {
     @Override
     public void add(int index, T element) {
         stackTrace = new Throwable();
-        throw new RuntimeException("You must complete this method!");
+
+        if (index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        add(index, element, head);
+    }
+
+    private void add(int index, T element, Node node) {
+        stackTrace = new Throwable();
+
+        if (index == 0) {
+            node.next = new Node(node.next, element);
+        } else if (node.next == null) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            add(index - 1, element, node.next);
+        }
     }
 
     @Override
     public T get(int index) {
         stackTrace = new Throwable();
+
+        if (index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
 
         return get(index, head);
     }
@@ -65,6 +86,10 @@ public class RecursiveLinkedList<T> implements SimpleList<T> {
     // Private ALTERNATE recursive helper method for public get(index)
     private T get(int index, Node node) {
         stackTrace = new Throwable();
+
+        if (node.next == null) {
+            throw new IndexOutOfBoundsException();
+        }
 
         if (index == 0) {
             return node.next.e;

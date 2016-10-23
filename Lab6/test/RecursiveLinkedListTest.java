@@ -21,13 +21,39 @@ public class RecursiveLinkedListTest {
      */
     @Test
     public void testAdd_int_GenericType() {
-        System.out.println("add");
+        System.out.println("Testing add(index, element)...");
         int index = 0;
-        Object element = null;
+        Object element = "String1";
         RecursiveLinkedList instance = new RecursiveLinkedList();
         instance.add(index, element);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        Object expResult, result;
+        expResult = 1;
+        result = instance.size();
+        assertEquals(expResult, result);
+
+        expResult = "String1";
+        result = instance.get(index);
+        assertEquals(expResult, result);
+
+        instance.add(1, "Test");
+        expResult = "Test";
+        result = instance.get(1);
+        assertEquals(expResult, result);
+
+        try {
+            instance.add(3, "test");
+            fail();
+        } catch (IndexOutOfBoundsException ex) {
+        }
+
+        for (int i = 0; i < 100; i++) {
+            instance.add(i);
+        }
+
+        expResult = 102;
+        result = instance.size();
+        assertEquals(expResult, result);
     }
 
     /**
