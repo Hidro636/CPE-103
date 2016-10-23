@@ -60,6 +60,7 @@ public class RecursiveLinkedList<T> implements SimpleList<T> {
         add(index, element, head);
     }
 
+    // Private ALTERNATE recursive helper method for public add(index, element)
     private void add(int index, T element, Node node) {
         stackTrace = new Throwable();
 
@@ -101,7 +102,26 @@ public class RecursiveLinkedList<T> implements SimpleList<T> {
     @Override
     public T remove(int index) {
         stackTrace = new Throwable();
-        throw new RuntimeException("You must complete this method!");
+
+        if (index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return remove(index, head);
+    }
+
+    private T remove(int index, Node node) {
+        stackTrace = new Throwable();
+
+        if (index == 0) {
+            T element = node.next.e;
+            node.next = node.next.next;
+            return element;
+        } else if (node.next == null) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            return remove(index - 1, node.next);
+        }
     }
 
     //---------------------------------------------------------------------------
