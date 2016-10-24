@@ -18,32 +18,32 @@ public class PriorityQueueTests {
     @Test
     public void testDequeue() {
         System.out.println("Testing dequeue()...");
-        PriorityQueue instance = new PriorityQueue();
-        
-        instance.enqueue(5);
-        instance.enqueue(11);
-        instance.enqueue(6);
-        instance.enqueue(4);
-        instance.enqueue(9);
-        instance.enqueue(5);
-        
-        Object expResult = 4;
-        System.out.println("1");
-        Object result = instance.dequeue();
-        System.out.println("noep");
-        assertEquals(expResult, result);
-        
-        expResult = 5;
-        result = instance.dequeue();
-        assertEquals(expResult, result);
-        
-        expResult = 5;
-        result = instance.dequeue();
-        assertEquals(expResult, result);
-        
-        expResult = 6;
-        result = instance.dequeue();
-        assertEquals(expResult, result);
+        PriorityQueue instance = new PriorityQueue(true);
+
+//        instance.enqueue(3);
+//        instance.enqueue(8);
+//        instance.enqueue(1);
+//        instance.enqueue(12);
+//        instance.enqueue(14);
+//        instance.enqueue(6);
+        for (int i = 500; i < 1000; i++) {
+            instance.enqueue(i);
+        }
+
+        for (int i = 249; i >= 0; i--) {
+            instance.enqueue(i);
+        }
+
+        for (int i = 250; i < 500; i++) {
+            instance.enqueue(i);
+        }
+
+        Object expResult, result;
+        for (int i = 999; i >= 0; i--) {
+            expResult = i;
+            result = instance.dequeue();
+            assertEquals(expResult, result);
+        }
     }
 
     /**
@@ -74,13 +74,20 @@ public class PriorityQueueTests {
      */
     @Test
     public void testPeek() {
-        System.out.println("peek");
+        System.out.println("Testing peek()...");
         PriorityQueue instance = new PriorityQueue();
-        Object expResult = null;
+
+        instance.enqueue(3);
+        instance.enqueue(2);
+        instance.enqueue(5);
+        instance.enqueue(12);
+        instance.enqueue(30);
+        instance.enqueue(6);
+
+        Object expResult = 2;
         Object result = instance.peek();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -127,12 +134,13 @@ public class PriorityQueueTests {
      */
     @Test
     public void testSort() {
-        System.out.println("sort");
-        Comparable[] arr = null;
-        int size = 0;
+        System.out.println("Testing sort()...");
+        Comparable[] arr = new Integer[]{1, 9, 2, 5, 23, 5, 6, 515, 1, 51, 4123, 23, 2, 1};
+        int size = 14;
         PriorityQueue.sort(arr, size);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        System.out.println();
+
     }
 
 }

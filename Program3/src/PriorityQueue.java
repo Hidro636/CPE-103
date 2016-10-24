@@ -53,7 +53,7 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
 
         heap.add(null);
         for (int i = 0; i < size; i++) {
-            heap.add(arr[i]);
+            enqueue(arr[i]);
         }
     }
 
@@ -77,29 +77,40 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
 
         heap.add(null);
         for (int i = 0; i < size; i++) {
-            heap.add(arr[i]);
+            enqueue(arr[i]);
         }
     }
 
     @Override
     public T dequeue() throws NoSuchElementException {
-        T value = heap.get(1);
-        heap.set(1, heap.remove(heap.size() - 1));
+        if (heap.size() <= 1) {
+            throw new NoSuchElementException();
+        }
+
+        T element = heap.get(1);
+
+        heap.set(1, heap.get(size()));
+
+        heap.remove((int) size());
 
         int i = 1;
-        while ((i * 2) + 1 < heap.size() - 1) {
-            if ((heap.get(i).compareTo(heap.get(i * 2)) < 0) == !isMax || (heap.get(i).compareTo(heap.get(i * 2 + 1)) < 0) == !isMax) {
-                if (heap.get(i * 2).compareTo(heap.get(i * 2 + 1)) < 0) { //i * 2 + 1 is larger
-                    swap(i, i * 2);
-                    i *= 2;
-                } else {
-                    swap(i, i * 2 + 1);
-                    i = i * 2 + 1;
-                }
+        while (true) {
+            if (size() == 2 && (heap.get(1).compareTo(heap.get(2)) > 0) == !isMax) {
+                swap(1, 2);
+            }
+
+            if (i * 2 < heap.size() && (heap.get(i).compareTo(heap.get(i * 2)) > 0) == !isMax && ((i * 2 + 1 < heap.size() && heap.get(i * 2).compareTo(heap.get(i * 2 + 1)) < 0) == !isMax)) {
+                swap(i, i * 2);
+                i *= 2;
+            } else if (i * 2 + 1 < heap.size() && (heap.get(i).compareTo(heap.get(i * 2 + 1)) > 0) == !isMax) {
+                swap(i, i * 2 + 1);
+                i = (i * 2) + 1;
+            } else {
+                break;
             }
         }
 
-        return value;
+        return element;
     }
 
     @Override
@@ -121,7 +132,7 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
         if (heap.size() <= 1) {
             throw new NoSuchElementException();
         } else {
-            return heap.get(0);
+            return heap.get(1);
         }
     }
 
@@ -135,6 +146,11 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
     }
 
     public static <E extends Comparable<? super E>> void sort(E[] arr, int size) {
+        PriorityQueue<E> queue = new PriorityQueue<>(arr, size);
+
+        for (int i = 0; i < size; i++) {
+            arr[i] = queue.dequeue();
+        }
     }
 
     private void swap(int index1, int index2) {
