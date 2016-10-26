@@ -142,9 +142,50 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
     }
 
     public static <E extends Comparable<? super E>> E kth(E[] arr, int size, int k) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PriorityQueue<E> queue;
+        if(k < size - k + 1) {
+            queue = new PriorityQueue<>(false);
+            for (int i = 0; i < k; i++) {
+                queue.enqueue(arr[i]);
+            }
+            for (int i = k; i < size; i++) {
+                if(arr[i].compareTo(queue.peek()) > 0) {
+                    queue.dequeue();
+                    queue.enqueue(arr[i]);
+                }
+            }
+            
+        } else {
+            queue = new PriorityQueue<>(true);
+            for (int i = 0; i < size - k + 1; i++) {
+                queue.enqueue(arr[i]);
+            }
+            
+            for (int i = size - k + 1; i < size; i++) {
+                if(arr[i].compareTo(queue.peek()) < 0) {
+                    queue.dequeue();
+                    queue.enqueue(arr[i]);
+                }
+            }
+        }
+        
+        return queue.dequeue();
+        
     }
 
+    /**
+     * Sorts the specified array into ascending order. For example: {A, B, C,
+     * ..., Z} or {1, 2, 3, ..., N}. You must use your PriorityQueue to sort the
+     * data. If you enqueue all the elements into a minimum queue, when you
+     * dequeue them they will come out in ascending order. Put them back in the
+     * specified array as you dequeue and you are done. The amount of work
+     * should be O ( n log n ) O(nlogn)—not a bad sort!
+     *
+     * @param <E> the type of elements in the array
+     * @param arr the array to be sorted
+     * @param size the number of elements in the array to be sorted (will be
+     * less than or equal to the length of the array)
+     */
     public static <E extends Comparable<? super E>> void sort(E[] arr, int size) {
         PriorityQueue<E> queue = new PriorityQueue<>(arr, size);
 

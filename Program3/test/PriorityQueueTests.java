@@ -118,15 +118,34 @@ public class PriorityQueueTests {
      */
     @Test
     public void testKth() {
-        System.out.println("kth");
-        Comparable[] arr = null;
-        int size = 0;
-        int k = 0;
-        Object expResult = null;
+        System.out.println("Testing kth()...");
+        Comparable[] arr = new Integer[]{1, 5, 2, 3, 6, 7, 9, 4, 12};
+        int size = 9;
+        int k = 3;
+        Object expResult = 7;
         Object result = PriorityQueue.kth(arr, size, k);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        size = 100;
+        arr = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = i;
+        }
+        k = 10;
+        expResult = 90;
+        result = PriorityQueue.kth(arr, size, k);
+        assertEquals(expResult, result);
+                
+        k = 100;
+        expResult = 0;
+        result = PriorityQueue.kth(arr, size, k);
+        assertEquals(expResult, result);
+        
+        k = 1;
+        expResult = 99;
+        result = PriorityQueue.kth(arr, size, k);
+        assertEquals(expResult, result);
+        
     }
 
     /**
