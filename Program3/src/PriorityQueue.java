@@ -200,12 +200,4 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
         heap.set(index2, heap.get(0));
         heap.set(0, null);
     }
-
-    public void _test() {
-        for (T t : heap) {
-            System.out.print(t + " ");
-        }
-
-        System.out.println();
-    }
 }

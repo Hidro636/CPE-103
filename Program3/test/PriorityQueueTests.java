@@ -1,4 +1,5 @@
 
+import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -66,7 +67,6 @@ public class PriorityQueueTests {
         instance.enqueue(43);
         instance.enqueue(80);
 
-        instance._test();
     }
 
     /**
@@ -105,7 +105,6 @@ public class PriorityQueueTests {
         instance.enqueue(1);
         instance.enqueue(5);
         instance.enqueue(9);
-        instance._test();
 
         expResult = 4;
         result = instance.size();
@@ -160,6 +159,46 @@ public class PriorityQueueTests {
 
         System.out.println();
 
+    }
+    
+    /**
+     * Test big O performance of sort
+     */
+    @Test 
+    public void testSortTime() {
+        System.out.println("Timing sort()...");
+        int size1 = 5000000;
+        int size2 = 10000000;
+        
+        Random r = new Random();
+        Integer[] arr = new Integer[size1];
+        
+        for (int i = 0; i < size1; i++) {
+            arr[i] = r.nextInt(10000);
+        }
+        
+        long start = System.currentTimeMillis();
+        long delta;
+        PriorityQueue.sort(arr, size1);
+        delta = System.currentTimeMillis() - start;
+        
+        System.out.println("Sort (n = " +  size1 + "): " + delta + "ms");
+        
+        arr = new Integer[size2];
+        
+        for (int i = 0; i < size2; i++) {
+            arr[i] = r.nextInt(10000);
+        }
+        
+        start = System.currentTimeMillis();
+        PriorityQueue.sort(arr, size2);
+        delta = System.currentTimeMillis() - start;
+        System.out.println("Sort (n = " + size2 +"): " + delta + "ms");
+        
+        for (int i = 100000; i < 101000; i++) {
+            System.out.print(arr[i]);
+        }
+        System.out.println("");
     }
 
 }
