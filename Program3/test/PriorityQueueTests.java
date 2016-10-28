@@ -194,11 +194,6 @@ public class PriorityQueueTests {
         PriorityQueue.sort(arr, size2);
         delta = System.currentTimeMillis() - start;
         System.out.println("Sort (n = " + size2 +"): " + delta + "ms");
-        
-        for (int i = 100000; i < 101000; i++) {
-            System.out.print(arr[i]);
-        }
-        System.out.println("");
     }
 
 }
