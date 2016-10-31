@@ -88,18 +88,25 @@ public class PriorityQueue<T extends Comparable<? super T>> implements SimpleQue
         }
 
         T element = heap.get(1);
-
-        heap.set(1, heap.get(size()));
-
+        heap.set(1, heap.get((int) size()));
         heap.remove((int) size());
 
         int i = 1;
         while (true) {
             if (size() == 2 && (heap.get(1).compareTo(heap.get(2)) > 0) == !isMax) {
                 swap(1, 2);
+		break;
             }
 
-            if (i * 2 < heap.size() && (heap.get(i).compareTo(heap.get(i * 2)) > 0) == !isMax && ((i * 2 + 1 < heap.size() && heap.get(i * 2).compareTo(heap.get(i * 2 + 1)) < 0) == !isMax)) {
+		/*
+		* IF: left child exists
+		* AND: parent is greater than left child (or smaller for max)
+		* AND: Right child exists) 
+		*
+		*/
+            if (i * 2 < heap.size() && (heap.get(i).compareTo(heap.get(i * 2)) > 0) == !isMax && (((i * 2 + 1 < heap.size() && heap.get(i * 2).compareTo(heap.get(i * 2 + 1)) <= 0) == !isMax) || (i * 2 + 1 >= heap.size()))) {
+		
+
                 swap(i, i * 2);
                 i *= 2;
             } else if (i * 2 + 1 < heap.size() && (heap.get(i).compareTo(heap.get(i * 2 + 1)) > 0) == !isMax) {
