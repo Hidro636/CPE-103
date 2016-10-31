@@ -647,7 +647,7 @@ public class PriorityQueueAcceptanceTests {
                assertEquals(pqLib.peek(), pqUnderTest.peek());
                break;
             case 2:
-               assertEquals(pqLib.poll(), pqUnderTest.peek());
+               assertEquals(pqLib.poll(), pqUnderTest.dequeue());
                break;
          }
          assertEquals(pqLib.size(), pqUnderTest.size());
