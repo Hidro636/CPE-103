@@ -37,10 +37,20 @@ public class BST<T extends Comparable<? super T>> {
         public T maximum(T maximum);
 
         public int treeHeight();
-        
+
         public long internalPathLength();
-        
+
         public void toSortedList(List<T> list);
+
+        /**
+         * Determines if the given node has children and whether they are a
+         * right or left child
+         *
+         * @return 0 if the given node has no children, -1 if the node only has
+         * a left child, 1 if the node only has a right child, and 2 if the node
+         * has both a left and right child
+         */
+        public int childrenStatus();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -150,7 +160,7 @@ public class BST<T extends Comparable<? super T>> {
 
         @Override
         public BSTNode<T> remove(T element) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            throw new NoSuchElementException();
         }
 
         @Override
@@ -161,6 +171,11 @@ public class BST<T extends Comparable<? super T>> {
         @Override
         public long internalPathLength() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int childrenStatus() {
+            return 0;
         }
     }
 
@@ -229,5 +244,19 @@ public class BST<T extends Comparable<? super T>> {
         public long internalPathLength() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
+
+        @Override
+        public int childrenStatus() {
+            if (left == EMPTY_NODE && right == EMPTY_NODE) {
+                return 0;
+            } else if (left != EMPTY_NODE && right != EMPTY_NODE) {
+                return 2;
+            } else if (left == EMPTY_NODE) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+
     }
 }
