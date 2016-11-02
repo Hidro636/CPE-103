@@ -127,7 +127,7 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         public boolean contains(T element) {
-            throw new RuntimeException("TODO: You must complete this method!");
+            return false;
         }
 
         public T minimum(T element) {
@@ -139,7 +139,7 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         public void toSortedList(List<T> list) {
-            throw new RuntimeException("TODO: You must complete this method!");
+            return;
         }
     }
 
@@ -161,29 +161,23 @@ public class BST<T extends Comparable<? super T>> {
 
         // You may (and probably want to) write constructor(s)
         public BSTNode<T> insert(T element) {
-            if (this.element.compareTo(element) == 0) {
-                return this;
-            } else if (this.element.compareTo(element) < 0) {
-                if (right == EMPTY_NODE) {
-                    right = new Node(element);
-                    size++;
-                    return right;
-                } else {
-                    return right.insert(element);
-                }
-            } else {
-                if (left == EMPTY_NODE) {
-                    left = new Node(element);
-                    size++;
-                    return left;
-                } else {
-                    return left.insert(element);
-                }
+            if (this.element.compareTo(element) < 0) {
+                right = right.insert(element);
+            } else if (this.element.compareTo(element) > 0) {
+                left = left.insert(element);
             }
+
+            return this;
         }
 
         public boolean contains(T element) {
-            throw new RuntimeException("TODO: You must complete this method!");
+            if (this.element.compareTo(element) == 0) {
+                return true;
+            } else if (this.element.compareTo(element) > 0) {
+                return left.contains(element);
+            } else {
+                return right.contains(element);
+            }
         }
 
         public T minimum(T element) {
@@ -195,7 +189,9 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         public void toSortedList(List<T> list) {
-            throw new RuntimeException("TODO: You must complete this method!");
+            left.toSortedList(list);
+            list.add(element);
+            right.toSortedList(list);
         }
     }
 }

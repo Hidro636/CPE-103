@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -9,7 +11,7 @@ import static org.junit.Assert.*;
  * @version CPE 103-03
  */
 public class BSTTests {
-    
+
     public BSTTests() {
     }
 
@@ -22,8 +24,14 @@ public class BSTTests {
         Comparable element = 1;
         BST instance = new BST();
         instance.insert(element);
-        
+
         assertEquals(1, instance.size());
+
+        instance.insert(1);
+        instance.insert(5);
+        instance.insert(2);
+        instance.insert(6);
+        assertEquals(4, instance.size());
     }
 
     /**
@@ -31,14 +39,29 @@ public class BSTTests {
      */
     @Test
     public void testContains() {
-        System.out.println("contains");
-        Comparable element = null;
+        System.out.println("Testing contains()...");
+        Comparable element = 5;
         BST instance = new BST();
-        boolean expResult = false;
+
+        instance.insert(element);
+
+        boolean expResult = true;
         boolean result = instance.contains(element);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.insert(3);
+        instance.insert(1);
+        instance.insert(12);
+
+        result = instance.contains(1);
+        assertEquals(expResult, result);
+
+        result = instance.contains(12);
+        assertEquals(expResult, result);
+
+        expResult = false;
+        result = instance.contains(14);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -46,13 +69,21 @@ public class BSTTests {
      */
     @Test
     public void testMinimum() {
-        System.out.println("minimum");
+        System.out.println("Testing minimum()...");
         BST instance = new BST();
-        Object expResult = null;
+
+        instance.insert(9);
+        instance.insert(3);
+        instance.insert(2);
+        instance.insert(4);
+        instance.insert(3);
+        instance.insert(12);
+        instance.insert(8);
+        instance.insert(10);
+
+        Object expResult = 2;
         Object result = instance.minimum();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -60,13 +91,21 @@ public class BSTTests {
      */
     @Test
     public void testMaximum() {
-        System.out.println("maximum");
+        System.out.println("Testing maximum()...");
         BST instance = new BST();
-        Object expResult = null;
+
+        instance.insert(9);
+        instance.insert(3);
+        instance.insert(2);
+        instance.insert(4);
+        instance.insert(3);
+        instance.insert(12);
+        instance.insert(8);
+        instance.insert(10);
+
+        Object expResult = 12;
         Object result = instance.maximum();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -74,11 +113,29 @@ public class BSTTests {
      */
     @Test
     public void testToSortedList() {
-        System.out.println("toSortedList");
+        System.out.println("Testing toSortedList()...");
         BST instance = new BST();
-        instance.toSortedList(null);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.insert(4);
+        instance.insert(12);
+        instance.insert(3);
+        instance.insert(1);
+        instance.insert(8);
+        instance.insert(9);
+        instance.insert(12);
+        instance.insert(33);
+        instance.insert(-2);
+        instance.insert(-5);
+
+        List<Integer> list = new ArrayList<>();
+        instance.toSortedList(list);
+
+        System.out.print("List: ");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i) + " ");
+        }
+
+        System.out.println("\n");
     }
 
     /**
@@ -86,13 +143,22 @@ public class BSTTests {
      */
     @Test
     public void testSize() {
-        System.out.println("size");
+        System.out.println("Testing size()...");
         BST instance = new BST();
         int expResult = 0;
         int result = instance.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.insert(result);
+        expResult = 1;
+        result = instance.size();
+        assertEquals(expResult, result);
+
+        expResult = 4;
+        instance.insert(1);
+        instance.insert(4);
+        instance.insert(1);
+        instance.insert(6);
     }
-    
+
 }
