@@ -38,7 +38,7 @@ public class BST<T extends Comparable<? super T>> {
 
         public int treeHeight();
 
-        public long internalPathLength();
+        public long internalPathLength(int length, int depth);
 
         public void toSortedList(List<T> list);
 
@@ -70,6 +70,18 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         root = root.insert(element);
+    }
+
+    /**
+     * Removes an element from the BST
+     *
+     * @param element The element to remove from the BST
+     *
+     * @throws NoSuchElementException if the element does not exist in the BST
+     */
+    public void remove(T element) {
+        root = root.remove(element);
+        size--;
     }
 
     /**
@@ -131,6 +143,25 @@ public class BST<T extends Comparable<? super T>> {
         return size;
     }
 
+    /**
+     * Returns the height of the BST
+     *
+     * @return the height of the BST
+     */
+    public int treeHeight() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * Returns the internal path length of the BST, which is a general measure
+     * for the efficiency of the tree's structure
+     *
+     * @return The sum of all nodes' depths within the BST
+     */
+    public long internalPathLength() {
+        return root.internalPathLength(-1, -1);
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // private EmptyNode class...
     //
@@ -165,12 +196,12 @@ public class BST<T extends Comparable<? super T>> {
 
         @Override
         public int treeHeight() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return -1;
         }
 
         @Override
-        public long internalPathLength() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public long internalPathLength(int length, int depth) {
+            return length;
         }
 
         @Override
@@ -232,7 +263,24 @@ public class BST<T extends Comparable<? super T>> {
 
         @Override
         public BSTNode<T> remove(T element) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            if (this.element.compareTo(element) == 0) {
+                switch (childrenStatus()) {
+                    case 0:
+                        return EMPTY_NODE;
+                    case 1:
+                        return left;
+                    case -1:
+                        return right;
+                    case 2:
+                        this.element = right.minimum(this.element);
+                        right.remove(this.element);
+                }
+            } else if (this.element.compareTo(element) > 0) {
+                left = left.remove(element);
+            } else {
+                right = right.remove(element);
+            }
+            return this;
         }
 
         @Override
@@ -241,8 +289,8 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         @Override
-        public long internalPathLength() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public long internalPathLength(int length, int depth) {
+
         }
 
         @Override
