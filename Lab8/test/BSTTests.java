@@ -55,6 +55,33 @@ public class BSTTests {
         int expResult = -1;
         int result = instance.treeHeight();
         assertEquals(expResult, result);
+
+        instance.insert(2);
+        expResult = 0;
+        result = instance.treeHeight();
+        assertEquals(expResult, result);
+
+        instance.insert(1);
+        expResult = 1;
+        result = instance.treeHeight();
+        assertEquals(expResult, result);
+
+        instance.insert(5);
+        result = instance.treeHeight();
+        assertEquals(expResult, result);
+
+        instance.insert(6);
+        instance.insert(7);
+        instance.insert(8);
+        expResult = 4;
+        result = instance.treeHeight();
+        assertEquals(expResult, result);
+
+        instance.insert(4);
+        instance.insert(3);
+        instance.insert(0);
+        result = instance.treeHeight();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -62,13 +89,34 @@ public class BSTTests {
      */
     @Test
     public void testInternalPathLength() {
-        System.out.println("internalPathLength");
+        System.out.println("Testing internalPathLength()...");
         BST instance = new BST();
-        int expResult = 0;
-        int result = instance.internalPathLength();
+        int expResult = -1;
+        long result = instance.internalPathLength();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        instance.insert(1);
+        expResult = 0;
+        result = instance.internalPathLength();
+        assertEquals(expResult, result);
+        
+        
+        
+        instance.insert(0);
+        instance.insert(2);
+        expResult = 2;
+        result = instance.internalPathLength();
+        assertEquals(expResult, result);
+
+        instance.insert(5);
+        instance.insert(12);
+        instance.insert(11);
+        instance.insert(15);
+        expResult = 15;
+        result = instance.internalPathLength();
+        assertEquals(expResult, result);
+
+        
     }
 
 }

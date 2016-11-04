@@ -36,9 +36,9 @@ public class BST<T extends Comparable<? super T>> {
 
         public T maximum(T maximum);
 
-        public int treeHeight();
+        public int treeHeight(int max, int height);
 
-        public long internalPathLength(int length, int depth);
+        public long internalPathLength(int depth);
 
         public void toSortedList(List<T> list);
 
@@ -149,7 +149,7 @@ public class BST<T extends Comparable<? super T>> {
      * @return the height of the BST
      */
     public int treeHeight() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return root.treeHeight(-1, -1);
     }
 
     /**
@@ -159,7 +159,7 @@ public class BST<T extends Comparable<? super T>> {
      * @return The sum of all nodes' depths within the BST
      */
     public long internalPathLength() {
-        return root.internalPathLength(-1, -1);
+        return root.internalPathLength(0);
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -195,13 +195,17 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         @Override
-        public int treeHeight() {
-            return -1;
+        public int treeHeight(int max, int height) {
+            if (height > max) {
+                return height;
+            } else {
+                return max;
+            }
         }
 
         @Override
-        public long internalPathLength(int length, int depth) {
-            return length;
+        public long internalPathLength(int depth) {
+            return depth - 1;
         }
 
         @Override
@@ -284,13 +288,26 @@ public class BST<T extends Comparable<? super T>> {
         }
 
         @Override
-        public int treeHeight() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public int treeHeight(int max, int height) {
+            max = left.treeHeight(max, height + 1);
+            max = right.treeHeight(max, height + 1);
+
+            return max;
         }
 
         @Override
-        public long internalPathLength(int length, int depth) {
+        public long internalPathLength(int depth) {
+            int sum = 0;
+            
+            if (left != EMPTY_NODE) {
+                sum += left.internalPathLength(depth + 1);
+            }
 
+            if (right != EMPTY_NODE) {
+                sum += right.internalPathLength(depth + 1);
+            }
+
+            return depth + sum;
         }
 
         @Override
