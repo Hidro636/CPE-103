@@ -9,6 +9,6 @@ import java.util.List;
 public class HashTools {
 
     public static <T> double avgCollisions(List<T> list, int tableSize, Hashable<T> hashable) {
-        
+        return 0;
     }
 }
