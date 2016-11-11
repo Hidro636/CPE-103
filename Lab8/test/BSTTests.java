@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,27 +23,64 @@ public class BSTTests {
     public void testRemove() {
         System.out.println("Testing remove()...");
         BST instance = new BST();
-
-        instance.insert(5);
-        instance.insert(1);
-        instance.insert(7);
-        instance.insert(6);
-        instance.insert(10);
-        instance.insert(9);
-        instance.insert(8);
-        instance.insert(11);
-        instance.insert(0);
-        instance.insert(-4);
-        instance.insert(-6);
-        instance.insert(-2);
-
         Object expResult, result;
+        instance.insert("a");
+        instance.insert("b");
+        instance.insert("c");
+        instance.insert("d");
+        instance.insert("e");
 
-        instance.remove(7);
-        expResult = 11;
-        result = instance.size();
-        assertEquals(expResult, result);
+        instance._print();
 
+        instance.remove("b");
+        instance._print();
+
+    }
+
+    //@Test
+    public void someTest() {
+        BST<String> bst = new BST<String>();
+        String[] strings = new String[]{"Hello", "these", "are", "some", "random", "strings.", "If", "this",
+            "test", "fails", "it's", "likely", "because", "the", "BST", "code", "being", "tested",
+            "uses", "compareTo", "incorrectly", "by", "looking", "for", "1", "and", "-1", "instead",
+            "of", "> 0 and", "< 0."};
+        String[] sortedStrings = new String[strings.length];
+        String[] otherStrings = new String[]{"things", "that", "do", "not", "exist", "in", "strings"};
+        ArrayList<String> sortedList = new ArrayList<String>();
+        int i;
+
+        for (i = 0; i < strings.length; i++) {
+            sortedStrings[i] = strings[i];
+            bst.insert(strings[i]);
+        }
+        for (i = 0; i < strings.length; i++) {
+            assertTrue(bst.contains(strings[i]));
+        }
+
+        for (i = 0; i < otherStrings.length; i++) {
+            assertFalse(bst.contains(otherStrings[i]));
+        }
+
+        Arrays.sort(sortedStrings);
+        assertEquals(sortedStrings[0], bst.minimum());
+        assertEquals(sortedStrings[sortedStrings.length - 1], bst.maximum());
+
+        bst.toSortedList(sortedList);
+        i = 0;
+        for (String s : sortedList) {
+            assertEquals("" + i, sortedStrings[i], s);
+            i++;
+        }
+        int size = bst.size();
+        assertEquals(strings.length, bst.size());
+
+        for (String s : strings) {
+            bst.remove(s);
+            //System.out.print(s + ": ");
+            //bst._print();
+            assertFalse(bst.contains(s));
+            assertEquals(--size, bst.size());
+        }
     }
 
     /**
@@ -94,14 +132,12 @@ public class BSTTests {
         int expResult = -1;
         long result = instance.internalPathLength();
         assertEquals(expResult, result);
-        
+
         instance.insert(1);
         expResult = 0;
         result = instance.internalPathLength();
         assertEquals(expResult, result);
-        
-        
-        
+
         instance.insert(0);
         instance.insert(2);
         expResult = 2;
@@ -116,7 +152,6 @@ public class BSTTests {
         result = instance.internalPathLength();
         assertEquals(expResult, result);
 
-        
     }
 
 }

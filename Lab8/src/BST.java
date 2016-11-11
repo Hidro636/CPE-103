@@ -51,6 +51,8 @@ public class BST<T extends Comparable<? super T>> {
          * has both a left and right child
          */
         public int childrenStatus();
+
+        public void _print();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -162,6 +164,11 @@ public class BST<T extends Comparable<? super T>> {
         return root.internalPathLength(0);
     }
 
+    public void _print() {
+        root._print();
+        System.out.println();
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // private EmptyNode class...
     //
@@ -211,6 +218,10 @@ public class BST<T extends Comparable<? super T>> {
         @Override
         public int childrenStatus() {
             return 0;
+        }
+
+        public void _print() {
+
         }
     }
 
@@ -268,17 +279,17 @@ public class BST<T extends Comparable<? super T>> {
         @Override
         public BSTNode<T> remove(T element) {
             if (this.element.compareTo(element) == 0) {
-                switch (childrenStatus()) {
-                    case 0:
-                        return EMPTY_NODE;
-                    case 1:
-                        return left;
-                    case -1:
-                        return right;
-                    case 2:
-                        this.element = right.minimum(this.element);
-                        right.remove(this.element);
+                if (left == EMPTY_NODE && right == EMPTY_NODE) {
+                    return EMPTY_NODE;
+                } else if (left != EMPTY_NODE && right != EMPTY_NODE) {
+                    this.element = right.minimum(this.element);
+                    right = right.remove(this.element);
+                } else if (left == EMPTY_NODE && right != EMPTY_NODE) {
+                    return right;
+                } else {
+                    return left;
                 }
+
             } else if (this.element.compareTo(element) > 0) {
                 left = left.remove(element);
             } else {
@@ -298,7 +309,7 @@ public class BST<T extends Comparable<? super T>> {
         @Override
         public long internalPathLength(int depth) {
             int sum = 0;
-            
+
             if (left != EMPTY_NODE) {
                 sum += left.internalPathLength(depth + 1);
             }
@@ -316,11 +327,21 @@ public class BST<T extends Comparable<? super T>> {
                 return 0;
             } else if (left != EMPTY_NODE && right != EMPTY_NODE) {
                 return 2;
-            } else if (left == EMPTY_NODE) {
+            } else if (left == EMPTY_NODE && right != EMPTY_NODE) {
                 return 1;
-            } else {
+            } else if (left != EMPTY_NODE && right == EMPTY_NODE) {
                 return -1;
+            } else {
+                System.out.println("Fuck");
+                return 11111;
             }
+        }
+
+        public void _print() {
+            left._print();
+            right._print();
+            System.out.print(this.element + " ");
+
         }
 
     }
