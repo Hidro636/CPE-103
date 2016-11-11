@@ -30,10 +30,9 @@ public class BSTTests {
         instance.insert("d");
         instance.insert("e");
 
-        instance._print();
-
+        //instance._print();
         instance.remove("b");
-        instance._print();
+        //instance._print();
 
     }
 
