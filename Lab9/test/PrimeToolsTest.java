@@ -34,11 +34,12 @@ public class PrimeToolsTest {
         boolean expResult = false;
         boolean result = PrimeTools.isPrime(value);
         assertEquals(expResult, result);
-        
+
         value = 3;
         expResult = true;
         result = PrimeTools.isPrime(value);
         assertEquals(expResult, result);
+
     }
 
     /**

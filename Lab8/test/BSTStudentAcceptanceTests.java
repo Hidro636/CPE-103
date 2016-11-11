@@ -303,7 +303,7 @@ public class BSTStudentAcceptanceTests {
    }
    
    @Test
-   @TestDescription(desc="Verify all methods work correctly with Strings")
+   //@TestDescription(desc="Verify all methods work correctly with Strings")
    public void test07_insertContainsMinMaxSortedWithStrings() { // points = 5 
       BST<String> bst = new BST<String>();
       String[] strings = new String[] {"Hello", "these", "are", "some", "random", "strings.", "If", "this", 
