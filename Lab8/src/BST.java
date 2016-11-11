@@ -52,7 +52,7 @@ public class BST<T extends Comparable<? super T>> {
          */
         public int childrenStatus();
 
-        public void _print();
+        //public void _print();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -162,11 +162,6 @@ public class BST<T extends Comparable<? super T>> {
      */
     public long internalPathLength() {
         return root.internalPathLength(0);
-    }
-
-    public void _print() {
-        root._print();
-        System.out.println();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -335,13 +330,6 @@ public class BST<T extends Comparable<? super T>> {
                 System.out.println("Fuck");
                 return 11111;
             }
-        }
-
-        public void _print() {
-            left._print();
-            right._print();
-            System.out.print(this.element + " ");
-
         }
 
     }
