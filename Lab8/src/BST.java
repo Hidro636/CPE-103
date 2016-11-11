@@ -52,7 +52,6 @@ public class BST<T extends Comparable<? super T>> {
          */
         public int childrenStatus();
 
-        //public void _print();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -214,10 +213,6 @@ public class BST<T extends Comparable<? super T>> {
         public int childrenStatus() {
             return 0;
         }
-
-        public void _print() {
-
-        }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -324,11 +319,8 @@ public class BST<T extends Comparable<? super T>> {
                 return 2;
             } else if (left == EMPTY_NODE && right != EMPTY_NODE) {
                 return 1;
-            } else if (left != EMPTY_NODE && right == EMPTY_NODE) {
-                return -1;
             } else {
-                System.out.println("Fuck");
-                return 11111;
+                return -1;
             }
         }
 
