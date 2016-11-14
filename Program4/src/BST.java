@@ -64,6 +64,11 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
             return element;
         }
 
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
     }
 
     // Polymorphic BST node type!
