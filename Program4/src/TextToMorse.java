@@ -54,7 +54,12 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
 
     @Override
     public String translate(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            
+        }
+
     }
 
 }
