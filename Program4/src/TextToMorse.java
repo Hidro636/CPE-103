@@ -42,7 +42,7 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
             return;
         }
 
-        bst.insert(new CharacterOrder(chars[mid], MorseCode.get(mid));
+        //bst.insert(new CharacterOrder(chars[mid], MorseCode.get(mid));
 
         buildBST(low, mid, chars, bst);
         buildBST(mid, high, chars, bst);
