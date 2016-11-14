@@ -9,7 +9,7 @@ public class MorseToText implements BSTTranslator<MorseOrder> {
     private BST<MorseOrder> bst;
 
     public MorseToText() {
-        MorseCode[] codes = new MorseCode[MorseCode.size()];
+        MorseCode[] codes = new MorseOrder[MorseCode.size()];
         for (int i = 0; i < MorseCode.size(); i++) {
             codes[i] = MorseCode.get(i);
         }
@@ -20,7 +20,8 @@ public class MorseToText implements BSTTranslator<MorseOrder> {
             swapped = false;
 
             for (int i = 0; i < codes.length - 1 - iterations; i++) {
-                if (codes[i].getCode().compareTo(codes[i + 1].getCode()) > 0) {
+                MorseOrder code = (MorseOrder) codes[i];
+                if (code.compareTo(code) > 0) {
                     swapped = true;
                     MorseCode temp = codes[i];
                     codes[i] = codes[i + 1];
