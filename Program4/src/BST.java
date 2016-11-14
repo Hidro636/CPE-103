@@ -26,39 +26,44 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            SimpleArrayStack<Node> stack = new SimpleArrayStack<>();
-            Node current = (Node) root;
+        return new BSTIterator<>((Node) root);
+    }
 
-            @Override
-            public boolean hasNext() {
-                return stack.size() != 0;
+    private class BSTIterator<T> implements Iterator<T> {
+
+        private SimpleArrayStack<Node> stack;
+
+        public BSTIterator(Node node) {
+            stack = new SimpleArrayStack<>();
+
+            while (node.left != EMPTY_NODE) {
+                stack.push(node);
+                node = (Node) node.left;
             }
+            stack.push(node);
+        }
 
-            @Override
-            public T next() {
+        @Override
+        public boolean hasNext() {
+            return stack.size() != 0;
+        }
+
+        @Override
+        public T next() {
+            Node current = stack.pop();
+            T element = (T) current.element;
+            if (current.right != EMPTY_NODE) {
+                current = (Node) current.right;
                 while (current.left != EMPTY_NODE) {
                     stack.push(current);
                     current = (Node) current.left;
                 }
-
-                current = stack.pop();
-                T element = current.element;
-                if (current.right != EMPTY_NODE) {
-                    current = (Node) current.right;
-                }
-
-                return element;asdf
-
-                //    c
-                //   b d
-                //  a   e
-                //  
-                // c|b
-                // as
+                stack.push(current);
             }
 
-        };
+            return element;
+        }
+
     }
 
     // Polymorphic BST node type!

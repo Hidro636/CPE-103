@@ -1,5 +1,7 @@
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -48,18 +50,37 @@ public class BSTTests {
 
     @Test
     public void testIterator() {
+        System.out.println("Testing iterator...");
         BST instance = new BST();
 
-        instance.insert("c");
-        instance.insert("b");
-        instance.insert("a");
-        instance.insert("d");
-        instance.insert("e");
+        int valueCount = 1000;
 
-        Iterator<String> iterator = instance.iterator();
-        System.out.println(iterator.next());
+        ArrayList<Integer> values = new ArrayList<>();
+        for (int i = 0; i < valueCount; i++) {
+            values.add(i);
+        }
+
+        Random r = new Random();
+
+        while (values.size() > 0) {
+            instance.insert(values.get(r.nextInt(values.size())));
+        }
+
+        Iterator<Integer> iterator = instance.iterator();
+        while (iterator.hasNext()) {
+            values.add(iterator.next());
+        }
+
+        for (int i = 0; i < valueCount; i++) {
+            assertEquals(i, values.get(i), 0);
+        }
+        
+        assertEquals(false, iterator.hasNext());
+
     }
 
+    
+    
     /**
      * For testing purposes only
      */
