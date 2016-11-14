@@ -26,7 +26,11 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new BSTIterator<>((Node) root);
+        if (this.size > 0) {
+            return new BSTIterator<>((Node) root);
+        } else {
+            return java.util.Collections.emptyIterator();
+        }
     }
 
     private class BSTIterator<T> implements Iterator<T> {
@@ -50,6 +54,7 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
 
         @Override
         public T next() {
+
             Node current = stack.pop();
             T element = (T) current.element;
             if (current.right != EMPTY_NODE) {
