@@ -52,7 +52,7 @@ public class BSTTests {
     public void testIterator() {
         System.out.println("Testing iterator...");
         BST instance = new BST();
-
+        assertFalse(instance.iterator().hasNext());
         int valueCount = 1000;
 
         ArrayList<Integer> values = new ArrayList<>();
@@ -63,7 +63,7 @@ public class BSTTests {
         Random r = new Random();
 
         while (values.size() > 0) {
-            instance.insert(values.get(r.nextInt(values.size())));
+            instance.insert(values.remove(r.nextInt(values.size())));
         }
 
         Iterator<Integer> iterator = instance.iterator();

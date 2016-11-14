@@ -29,7 +29,23 @@ public class BST<T extends Comparable<? super T>> implements Iterable<T> {
         if (this.size > 0) {
             return new BSTIterator<>((Node) root);
         } else {
-            return java.util.Collections.emptyIterator();
+            return new Iterator<T>() {
+                @Override
+                public void remove() {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public boolean hasNext() {
+                    return false;
+                }
+
+                @Override
+                public T next() {
+                    return null;
+                }
+
+            };
         }
     }
 
