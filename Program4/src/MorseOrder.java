@@ -12,7 +12,7 @@ public class MorseOrder extends MorseCode implements Comparable<MorseOrder> {
 
     @Override
     public int compareTo(MorseOrder o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getCharacter().compareTo(o.getCharacter());
     }
 
 }

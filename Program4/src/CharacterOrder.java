@@ -1,5 +1,4 @@
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -14,7 +13,7 @@ public class CharacterOrder extends MorseCode implements Comparable<CharacterOrd
 
     @Override
     public int compareTo(CharacterOrder o) {
-        throw new NotImplementedException();
+        return this.getCharacter().compareTo(o.getCharacter());
     }
 
 }
