@@ -1,4 +1,6 @@
 
+import java.util.NoSuchElementException;
+
 /**
  *
  * @author Lucas Robertson
@@ -17,7 +19,7 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
 
         boolean swapped = true;
         int iterations = 0;
-        
+
         //Sort
         while (swapped) {
             swapped = false;
@@ -62,12 +64,18 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
             if (c == ' ') {
                 sb.append(" ");
             } else {
-                System.out.println("finding " + c);
-                sb.append(bst.get(new CharacterOrder(c)).getCode());
+                try {
+                    sb.append(bst.get(new CharacterOrder(c)).getCode());
+                    sb.append(" ");
+                } catch (NoSuchElementException ses) {
+
+                } catch (Exception ex) {
+                    throw ex;
+                }
             }
         }
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
 }
