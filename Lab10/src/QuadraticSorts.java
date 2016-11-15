@@ -30,7 +30,7 @@ public class QuadraticSorts {
                 if (array[i].compareTo(array[i + 1]) > 0) {
                     T temp = array[i];
                     array[i] = array[i + 1];
-                    array[i + 1] = temp;
+                    array[i + 1] = temp;    
                     newN = i;
                 }
             }
