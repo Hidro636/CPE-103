@@ -49,6 +49,30 @@ public class Report {
         end = System.currentTimeMillis();
         long bubble1_4 = end - start;
 //</editor-fold>
+        System.out.println("Timing bubble sort 2...");
+        arr = buildArray(size1);
+        start = System.currentTimeMillis();
+        QuadraticSorts.bubbleSort2(arr);
+        end = System.currentTimeMillis();
+        long bubble2_1 = end - start;
+
+        arr = buildArray(size2);
+        start = System.currentTimeMillis();
+        QuadraticSorts.bubbleSort2(arr);
+        end = System.currentTimeMillis();
+        long bubble2_2 = end - start;
+
+        arr = buildArray(size3);
+        start = System.currentTimeMillis();
+        QuadraticSorts.bubbleSort2(arr);
+        end = System.currentTimeMillis();
+        long bubble2_3 = end - start;
+
+        arr = buildArray(size4);
+        start = System.currentTimeMillis();
+        QuadraticSorts.bubbleSort2(arr);
+        end = System.currentTimeMillis();
+        long bubble2_4 = end - start;
 
         System.out.println("Timing insertion sort...");
         arr = buildArray(size1);
@@ -105,6 +129,18 @@ public class Report {
         stream.println("\t" + size2 + " elements\t(observed): " + bubble1_2 + " ms");
         stream.println("\t" + size3 + " elements\t(observed): " + bubble1_3 + " ms");
         stream.println("\t" + size4 + " elements\t(observed): " + bubble1_4 + " ms");
+        stream.println("\t" + 500000 + " elements\t(calculated): " + (500000 / 20000 / 2 * 4 * bubble1_4) + " ms");
+        stream.println("\t" + 5000000 + " elements\t(calculated): " + (5000000 / 20000 / 2 * 4 * bubble1_4) + " ms");
+
+        stream.println();
+
+        stream.println("Bubble sort 2:");
+        stream.println("\t" + size1 + " elements\t(observed): " + bubble2_1 + " ms");
+        stream.println("\t" + size2 + " elements\t(observed): " + bubble2_2 + " ms");
+        stream.println("\t" + size3 + " elements\t(observed): " + bubble2_3 + " ms");
+        stream.println("\t" + size4 + " elements\t(observed): " + bubble2_4 + " ms");
+        stream.println("\t" + 500000 + " elements\t(calculated): " + (500000 / 20000 / 2 * 4 * bubble2_4) + " ms");
+        stream.println("\t" + 5000000 + " elements\t(calculated): " + (5000000 / 20000 / 2 * 4 * bubble2_4) + " ms");
         stream.println();
 
         stream.println("Insertion sort: ");
@@ -112,6 +148,8 @@ public class Report {
         stream.println("\t" + size2 + " elements\t(observed): " + insertion_2 + " ms");
         stream.println("\t" + size3 + " elements\t(observed): " + insertion_3 + " ms");
         stream.println("\t" + size4 + " elements\t(observed): " + insertion_4 + " ms");
+        stream.println("\t" + 500000 + " elements\t(calculated): " + (500000 / 20000 / 2 * 4 * insertion_4) + " ms");
+        stream.println("\t" + 5000000 + " elements\t(calculated): " + (5000000 / 20000 / 2 * 4 * insertion_4) + " ms");
         stream.println();
 
         stream.println("Selection sort: ");
@@ -119,6 +157,8 @@ public class Report {
         stream.println("\t" + size2 + " elements\t(observed): " + selection_2 + " ms");
         stream.println("\t" + size3 + " elements\t(observed): " + selection_3 + " ms");
         stream.println("\t" + size4 + " elements\t(observed): " + selection_4 + " ms");
+        stream.println("\t" + 500000 + " elements\t(calculated): " + (500000 / 20000 / 2 * 4 * selection_4) + " ms");
+        stream.println("\t" + 5000000 + " elements\t(calculated): " + (5000000 / 20000 / 2 * 4 * selection_4) + " ms");
 
         stream.close();
 

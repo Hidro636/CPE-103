@@ -1,17 +1,31 @@
 Bubble sort 1:
-	2500 elements	(observed): 66 ms
-	5000 elements	(observed): 219 ms
-	10000 elements	(observed): 786 ms
-	20000 elements	(observed): 2919 ms
+	2500 elements	(observed): 68 ms
+	5000 elements	(observed): 157 ms
+	10000 elements	(observed): 681 ms
+	20000 elements	(observed): 2906 ms
+	500000 elements	(calculated): 139488 ms
+	5000000 elements	(calculated): 1453000 ms
+
+Bubble sort 2:
+	2500 elements	(observed): 50 ms
+	5000 elements	(observed): 104 ms
+	10000 elements	(observed): 420 ms
+	20000 elements	(observed): 1957 ms
+	500000 elements	(calculated): 93936 ms
+	5000000 elements	(calculated): 978500 ms
 
 Insertion sort: 
-	2500 elements	(observed): 58 ms
-	5000 elements	(observed): 77 ms
-	10000 elements	(observed): 94 ms
-	20000 elements	(observed): 392 ms
+	2500 elements	(observed): 67 ms
+	5000 elements	(observed): 69 ms
+	10000 elements	(observed): 96 ms
+	20000 elements	(observed): 414 ms
+	500000 elements	(calculated): 19872 ms
+	5000000 elements	(calculated): 207000 ms
 
 Selection sort: 
-	2500 elements	(observed): 43 ms
-	5000 elements	(observed): 51 ms
-	10000 elements	(observed): 131 ms
-	20000 elements	(observed): 488 ms
+	2500 elements	(observed): 42 ms
+	5000 elements	(observed): 52 ms
+	10000 elements	(observed): 115 ms
+	20000 elements	(observed): 481 ms
+	500000 elements	(calculated): 23088 ms
+	5000000 elements	(calculated): 240500 ms
