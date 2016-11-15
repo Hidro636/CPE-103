@@ -37,7 +37,11 @@ public class QuadraticSortsTests {
 
         array = new String[]{"alpha", "gamma", "beta", "rho", "pi", "omicron", "sigma", "epsilon"};
         QuadraticSorts.bubbleSort2(array);
-        assertArrayEquals(array, new String[]{"alpha", "beta", "epsilon", "gamma", "pi", "omicron", "rho", "sigma"});
+        assertArrayEquals(array, new String[]{"alpha", "beta", "epsilon", "gamma", "omicron", "pi", "rho", "sigma"});
+
+        array = new String[]{"a", "b"};
+        QuadraticSorts.bubbleSort2(array);
+        assertArrayEquals(array, new String[]{"a", "b"});
     }
 
     /**

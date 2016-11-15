@@ -1,0 +1,17 @@
+Bubble sort 1:
+	2500 elements	(observed): 66 ms
+	5000 elements	(observed): 219 ms
+	10000 elements	(observed): 786 ms
+	20000 elements	(observed): 2919 ms
+
+Insertion sort: 
+	2500 elements	(observed): 58 ms
+	5000 elements	(observed): 77 ms
+	10000 elements	(observed): 94 ms
+	20000 elements	(observed): 392 ms
+
+Selection sort: 
+	2500 elements	(observed): 43 ms
+	5000 elements	(observed): 51 ms
+	10000 elements	(observed): 131 ms
+	20000 elements	(observed): 488 ms

@@ -22,15 +22,14 @@ public class QuadraticSorts {
     }
 
     public static <T extends Comparable<? super T>> void bubbleSort2(T[] array) {
-        int newN = 0;
-        int n = array.length - 1;
-
-        while (n > 1) {
-            for (int i = 0; i < n; i++) {
-                if (array[i].compareTo(array[i + 1]) > 0) {
+        int n = array.length;
+        while (n > 0) {
+            int newN = 0;
+            for (int i = 1; i < n; i++) {
+                if (array[i - 1].compareTo(array[i]) > 0) {
                     T temp = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = temp;    
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
                     newN = i;
                 }
             }
