@@ -36,17 +36,18 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
         }
 
         bst = new BST<>();
-        buildBST(0, codes.length, codes, bst);
+        buildBST(0, MorseCode.size(), codes, bst);
     }
 
     private void buildBST(int low, int high, MorseCode[] codes, BST<CharacterOrder> bst) {
         int mid = ((high - low) / 2) + low;
 
+        bst.insert(new CharacterOrder(codes[mid]));
+
         if (mid == low) {
             return;
         }
 
-        bst.insert(new CharacterOrder(codes[mid]));
         buildBST(low, mid, codes, bst);
         buildBST(mid, high, codes, bst);
     }
@@ -69,8 +70,6 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
                     sb.append(" ");
                 } catch (NoSuchElementException ses) {
 
-                } catch (Exception ex) {
-                    throw ex;
                 }
             }
         }
