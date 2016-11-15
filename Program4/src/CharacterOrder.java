@@ -14,6 +14,10 @@ public class CharacterOrder extends MorseCode implements Comparable<CharacterOrd
         super(character, code);
     }
 
+    public CharacterOrder(Character character) {
+        super(character, null);
+    }
+
     @Override
     public int compareTo(CharacterOrder o) {
         return this.getCharacter().compareTo(o.getCharacter());

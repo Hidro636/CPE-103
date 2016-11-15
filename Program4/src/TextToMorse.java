@@ -17,6 +17,8 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
 
         boolean swapped = true;
         int iterations = 0;
+        
+        //Sort
         while (swapped) {
             swapped = false;
 
@@ -57,9 +59,15 @@ public class TextToMorse implements BSTTranslator<CharacterOrder> {
 
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
-            
+            if (c == ' ') {
+                sb.append(" ");
+            } else {
+                System.out.println("finding " + c);
+                sb.append(bst.get(new CharacterOrder(c)).getCode());
+            }
         }
 
+        return sb.toString();
     }
 
 }
