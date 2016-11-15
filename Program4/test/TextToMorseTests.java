@@ -31,22 +31,5 @@ public class TextToMorseTests {
         expResult = "- .... .. ...  .. ...  .-  .-.. --- -. --. . .-.  - . ... -  .-- .. - ....  ... .--. .- -.-. . ...  .- -. -..  ... ..- -.-. ....  - .... .- -  .-- .. .-.. .-..  -... .  .--. .-. . - - -.--  .-.. --- -. --.";
         result = instance.translate(element);
         assertEquals(expResult, result);
-
-        element = "JUST. A (BUNCH) OF SYMB@LS";
-        expResult = ".--- ..- ... - .-.-.-  .-  -.--.- -... ..- -. -.-. .... -.--.-  --- ..-.  ... -.-- -- -... .--.-. .-.. ...";
-        result = instance.translate(element);
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void test27_verifyTextToMorseBasic() {
-        TextToMorse translator = new TextToMorse();
-
-        for (int i = 0; i < MorseCode.size(); i++) {
-            String text = "" + MorseCode.get(i).getCharacter();
-            String morse = translator.translate(text);
-            System.out.println(MorseCode.get(i).getCharacter());
-            assertTrue(morse.equals(MorseCode.get(i).getCode()));
-        }
     }
 }

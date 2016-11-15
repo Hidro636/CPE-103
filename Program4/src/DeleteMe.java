@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class DeleteMe {
 
     public static void main(String[] args) {
-        MorseToText mtot = new MorseToText();
-        System.out.println(mtot.translate("... --- ..."));
+        TextToMorse ttm = new TextToMorse();
+        System.out.println(ttm.translate("(SOMETHING) WITH A $LOT OF .SYMBO_LS"));
     }
 }
