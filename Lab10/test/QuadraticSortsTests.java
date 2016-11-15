@@ -29,11 +29,11 @@ public class QuadraticSortsTests {
      */
     @Test
     public void testBubbleSort2() {
-        System.out.println("bubbleSort2");
-        Comparable[] array = null;
+        System.out.println("Testing bubbleSort2()...");
+        Comparable[] array = new Integer[]{5, 1, 9, 11, 2, 6, 1, 2, 3, 12, 7};
         QuadraticSorts.bubbleSort2(array);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        assertArrayEquals(array, new Integer[]{1, 1, 2, 2, 3, 5, 6, 7, 9, 11, 12});
     }
 
     /**
@@ -41,11 +41,11 @@ public class QuadraticSortsTests {
      */
     @Test
     public void testInsertionSort() {
-        System.out.println("insertionSort");
-        Comparable[] array = null;
+        System.out.println("Testing insertionSort()...");
+        Comparable[] array = new Integer[]{5, 1, 9, 11, 2, 6, 1, 2, 3, 12, 7};
         QuadraticSorts.insertionSort(array);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        assertArrayEquals(array, new Integer[]{1, 1, 2, 2, 3, 5, 6, 7, 9, 11, 12});
     }
 
     /**
@@ -53,11 +53,11 @@ public class QuadraticSortsTests {
      */
     @Test
     public void testSelectionSort() {
-        System.out.println("selectionSort");
-        Comparable[] array = null;
+        System.out.println("Testing  selectionSort()...");
+        Comparable[] array = new Integer[]{5, 1, 9, 11, 2, 6, 1, 2, 3, 12, 7};
         QuadraticSorts.selectionSort(array);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        assertArrayEquals(array, new Integer[]{1, 1, 2, 2, 3, 5, 6, 7, 9, 11, 12});
     }
 
 }
