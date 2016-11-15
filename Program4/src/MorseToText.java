@@ -41,11 +41,12 @@ public class MorseToText implements BSTTranslator<MorseOrder> {
     private void buildBST(int low, int high, MorseCode[] codes, BST<MorseOrder> bst) {
         int mid = ((high - low) / 2) + low;
 
+        bst.insert(new MorseOrder(codes[mid]));
+
         if (mid == low) {
             return;
         }
-
-        bst.insert(new MorseOrder(codes[mid]));
+        
         buildBST(low, mid, codes, bst);
         buildBST(mid, high, codes, bst);
     }
