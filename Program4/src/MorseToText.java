@@ -1,4 +1,6 @@
 
+import java.util.Scanner;
+
 /**
  *
  * @author Lucas Robertson
@@ -9,19 +11,20 @@ public class MorseToText implements BSTTranslator<MorseOrder> {
     private BST<MorseOrder> bst;
 
     public MorseToText() {
-        MorseCode[] codes = new MorseOrder[MorseCode.size()];
+        MorseCode[] codes = new MorseCode[MorseCode.size()];
         for (int i = 0; i < MorseCode.size(); i++) {
             codes[i] = MorseCode.get(i);
         }
 
         boolean swapped = true;
         int iterations = 0;
+
+        //Sort
         while (swapped) {
             swapped = false;
 
             for (int i = 0; i < codes.length - 1 - iterations; i++) {
-                MorseOrder code = (MorseOrder) codes[i];
-                if (code.compareTo(code) > 0) {
+                if (codes[i].getCode().compareTo(codes[i + 1].getCode()) > 0) {
                     swapped = true;
                     MorseCode temp = codes[i];
                     codes[i] = codes[i + 1];
@@ -32,7 +35,7 @@ public class MorseToText implements BSTTranslator<MorseOrder> {
         }
 
         bst = new BST<>();
-        buildBST(0, codes.length, codes, bst);
+        buildBST(0, MorseCode.size(), codes, bst);
     }
 
     private void buildBST(int low, int high, MorseCode[] codes, BST<MorseOrder> bst) {
@@ -54,7 +57,20 @@ public class MorseToText implements BSTTranslator<MorseOrder> {
 
     @Override
     public String translate(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        Scanner in = new Scanner(s);
+        in.useDelimiter(" ");
+        String next;
+        while (in.hasNext()) {
+            next = in.next();
+            if (next.equals("")) {
+                sb.append(" ");
+            } else {
+                sb.append(bst.get(new MorseOrder(next)).getCharacter());
+            }
+        }
+
+        return sb.toString().trim();
     }
 
 }

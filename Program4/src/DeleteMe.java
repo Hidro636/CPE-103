@@ -1,4 +1,6 @@
 
+import java.util.Scanner;
+
 /**
  *
  * @author Lucas Robertson
@@ -7,9 +9,7 @@
 public class DeleteMe {
 
     public static void main(String[] args) {
-        TextToMorse mtot = new TextToMorse();
-        System.out.println(mtot.getBST().size());
-        System.out.println(1 / 2);
-        System.out.println(mtot.translate("S O S"));
+        MorseToText mtot = new MorseToText();
+        System.out.println(mtot.translate("... --- ..."));
     }
 }

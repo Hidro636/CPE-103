@@ -6,6 +6,10 @@
  */
 public class MorseOrder extends MorseCode implements Comparable<MorseOrder> {
 
+    public MorseOrder(String code) {
+        super(null, code);
+    }
+
     public MorseOrder(MorseCode other) {
         super(other.getCharacter(), other.getCode());
     }
