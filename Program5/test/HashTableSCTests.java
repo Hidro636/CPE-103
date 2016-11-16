@@ -14,34 +14,6 @@ public class HashTableSCTests {
     }
 
     /**
-     * Test of collisions method, of class HashTableSC.
-     */
-    @Test
-    public void testCollisions() {
-        System.out.println("collisions");
-        HashTableSC instance = null;
-        long expResult = 0L;
-        long result = instance.collisions();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of maxCollisions method, of class HashTableSC.
-     */
-    @Test
-    public void testMaxCollisions() {
-        System.out.println("maxCollisions");
-        HashTableSC instance = null;
-        int expResult = 0;
-        int result = instance.maxCollisions();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of add method, of class HashTableSC.
      */
     @Test
