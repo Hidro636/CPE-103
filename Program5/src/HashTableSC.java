@@ -9,15 +9,24 @@
 public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
     private int size;
-    private int tableSize;
-    private T[] table;
+    private HashTableSC.Node[] table;
 
     private long collisions;
     private int maxCollisions;
 
     private class Node {
 
-        private Node next;
+        public Node next;
+        public int key;
+        public T value;
+        public boolean removed;
+
+        public Node(int key, T value) {
+            this.key = key;
+            this.value = value;
+            next = null;
+            removed = false;
+        }
     }
 
     /**
@@ -33,9 +42,8 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
             throw new IllegalArgumentException();
         }
 
-        this.tableSize = tableSize;
         this.size = 0;
-        table = (T[]) new Object[tableSize];
+        table = new HashTableSC.Node[PrimeTools.nextPrime(tableSize)];
 
         collisions = 0;
         maxCollisions = 0;
@@ -53,27 +61,76 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
     @Override
     public boolean add(T element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int index = element.hashCode() % tableSize();
+
+        if (contains(element)) {
+            return false;
+        } else if (table[index] == null || table[index].removed) {
+            table[index] = new Node(index, element);
+        } else {
+            Node current = table[index];
+            int curCol = 1;
+            while (current.next != null) {
+                curCol++;
+                current = current.next;
+                if (current.removed) {
+                    Node temp = current.next;
+                    current = new Node(index, element);
+                    current.next = temp;
+                }
+            }
+
+            current.next = new Node(index, element);
+
+            collisions++;
+            if (curCol > maxCollisions) {
+                maxCollisions = curCol;
+            }
+        }
+
+        size++;
+        return true;
     }
 
     @Override
     public boolean contains(T element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int index = element.hashCode() % tableSize();
+        Node current = table[index];
+        while (current != null) {
+            if (current.value == element) {
+                return !current.removed;
+            }
+            current = current.next;
+        }
+
+        return false;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return size == 0;
     }
 
     @Override
     public double loadFactor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (double) this.size / (double) tableSize();
     }
 
     @Override
     public boolean remove(T element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int index = element.hashCode() % tableSize();
+
+        if (!contains(element)) {
+            return false;
+        } else {
+            Node current = table[index];
+            while (current.value != element) {
+                current = current.next;
+            }
+            current.removed = true;
+            size--;
+            return true;
+        }
     }
 
     @Override
@@ -83,6 +140,6 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
     @Override
     public int tableSize() {
-        return this.tableSize;
+        return this.table.length;
     }
 }

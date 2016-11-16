@@ -1,41 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  *
- * @author Lucas
+ * @author Lucas Robertson
+ * @version Program 5
  */
 public class HashTableSCTests {
 
-    
-
     public HashTableSCTests() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -71,14 +46,16 @@ public class HashTableSCTests {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        Object element = null;
-        HashTableSC instance = null;
-        boolean expResult = false;
+        System.out.println("Testing add()...");
+        String element = "john";
+        HashTableSC<String> instance = new HashTableSC<>(100);
+        boolean expResult = true;
         boolean result = instance.add(element);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        expResult = false;
+        result = instance.add(element);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -86,14 +63,30 @@ public class HashTableSCTests {
      */
     @Test
     public void testContains() {
-        System.out.println("contains");
-        Object element = null;
-        HashTableSC instance = null;
+        System.out.println("Testing contains()...");
+        Object element = "john";
+        HashTableSC instance = new HashTableSC(100);
         boolean expResult = false;
         boolean result = instance.contains(element);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        expResult = true;
+        instance.add("john");
+        result = instance.contains(element);
+        assertEquals(expResult, result);
+
+        instance = new HashTableSC(200);
+        for (int i = 0; i < 100; i++) {
+            instance.add(i);
+        }
+
+        Random r = new Random();
+        for (int i = 0; i < 500; i++) {
+            int value = r.nextInt(300);
+            expResult = value < 100;
+            result = instance.contains(value);
+            assertEquals(expResult, result);
+        }
     }
 
     /**
@@ -101,13 +94,17 @@ public class HashTableSCTests {
      */
     @Test
     public void testIsEmpty() {
-        System.out.println("isEmpty");
-        HashTableSC instance = null;
-        boolean expResult = false;
+        System.out.println("Testing isEmpty()...");
+        HashTableSC instance = new HashTableSC(100);
+        boolean expResult = true;
         boolean result = instance.isEmpty();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.add("3");
+        instance.add("test");
+        expResult = false;
+        result = instance.isEmpty();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -115,13 +112,26 @@ public class HashTableSCTests {
      */
     @Test
     public void testLoadFactor() {
-        System.out.println("loadFactor");
-        HashTableSC instance = null;
+        System.out.println("Testing loadFactor()...");
+        HashTableSC instance = new HashTableSC(100);
         double expResult = 0.0;
         double result = instance.loadFactor();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        for (int i = 0; i < 50; i++) {
+            instance.add(i);
+        }
+        expResult = 0.495;
+        result = instance.loadFactor();
+        assertEquals(expResult, result, 0.01);
+
+        for (int i = 0; i < 25; i++) {
+            instance.remove(i);
+        }
+
+        expResult = 0.2475;
+        result = instance.loadFactor();
+        assertEquals(expResult, result, 0.01);
     }
 
     /**
@@ -129,14 +139,25 @@ public class HashTableSCTests {
      */
     @Test
     public void testRemove() {
-        System.out.println("remove");
-        Object element = null;
-        HashTableSC instance = null;
+        System.out.println("Testing remove()...");
+        Object element = "sam";
+        HashTableSC instance = new HashTableSC(100);
         boolean expResult = false;
         boolean result = instance.remove(element);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.add("jacob");
+        instance.add("julie");
+        instance.add("sarah");
+        instance.add("sam");
+
+        expResult = true;
+        result = instance.remove(element);
+        assertEquals(expResult, result);
+
+        expResult = false;
+        result = instance.remove(element);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -144,13 +165,18 @@ public class HashTableSCTests {
      */
     @Test
     public void testSize() {
-        System.out.println("size");
-        HashTableSC instance = null;
+        System.out.println("Testing size()...");
+        HashTableSC instance = new HashTableSC(100);
         int expResult = 0;
         int result = instance.size();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        for (int i = 0; i < 5; i++) {
+            instance.add(i);
+        }
+        expResult = 5;
+        result = instance.size();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -158,13 +184,12 @@ public class HashTableSCTests {
      */
     @Test
     public void testTableSize() {
-        System.out.println("tableSize");
-        HashTableSC instance = null;
-        int expResult = 0;
+        System.out.println("Testing tableSize()...");
+        HashTableSC instance = new HashTableSC(50);
+        int expResult = 53;
         int result = instance.tableSize();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
 }
