@@ -63,14 +63,15 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean add(T element) {
         int index = element.hashCode() % tableSize();
 
-        if (contains(element)) {
+        if (contains(element)) { //Already contains the element
             return false;
-        } else if (table[index] == null || table[index].removed) {
+        } else if (table[index] == null || table[index].removed) { //No element at the given position
             table[index] = new Node(index, element);
-        } else {
+        } else { //Collision
             Node current = table[index];
             int curCol = 1;
             while (current.next != null) {
+                collisions++;
                 curCol++;
                 current = current.next;
                 if (current.removed) {
@@ -82,7 +83,6 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
             current.next = new Node(index, element);
 
-            collisions++;
             if (curCol > maxCollisions) {
                 maxCollisions = curCol;
             }
