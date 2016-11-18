@@ -152,7 +152,7 @@ public class SpellChecker {
                     MyStats stat = map.get(word);
                     map.put(word, new MyStats(stat.getLineNumbers(), lineNumber, stat.getOccurrences() + 1, stat.isWord));
                 } else {
-                    map.put(word, new MyStats(new ArrayList<>(), lineNumber, 1, this.isWord(word)));
+                    map.put(word, new MyStats(new ArrayList<Integer>(), lineNumber, 1, this.isWord(word)));
                 }
 
             }
