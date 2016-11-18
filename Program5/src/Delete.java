@@ -16,6 +16,6 @@ public class Delete {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         File f = new File("honeynet.txt");
         System.out.println(f.length() / 1024 * 120);
-        
+
     }
 }

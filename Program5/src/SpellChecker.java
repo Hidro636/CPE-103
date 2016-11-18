@@ -1,6 +1,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -16,13 +17,25 @@ public class SpellChecker {
 
     public class MyStats {
 
+        private List<Integer> lineNumbers;
+        private int occurrences;
+        private boolean isWord;
+
+        public MyStats(List<Integer> lineNumbers, int nextLineNumber, int occurrences, boolean isWord) {
+            this.lineNumbers = lineNumbers;
+            this.lineNumbers.add(nextLineNumber);
+
+            this.occurrences = occurrences;
+            this.isWord = isWord;
+        }
+
         /**
          * Returns a list containing all line numbers the string was on
          *
          * @return a list containing all line numbers the string was on
          */
         public List<Integer> getLineNumbers() {
-            throw new UnsupportedOperationException();
+            return this.lineNumbers;
         }
 
         /**
@@ -31,7 +44,7 @@ public class SpellChecker {
          * @return the number of times the string has been seen
          */
         public int getOccurrences() {
-            throw new UnsupportedOperationException();
+            return this.occurrences;
         }
 
         /**
@@ -40,7 +53,7 @@ public class SpellChecker {
          * @return true if the string is a word; false otherwise
          */
         public boolean isWord() {
-            throw new UnsupportedOperationException();
+            return this.isWord;
         }
 
     }
@@ -71,8 +84,12 @@ public class SpellChecker {
      * @throws FileNotFoundException if the specified file is not found
      */
     public SpellChecker(String fileName) throws FileNotFoundException {
-        Scanner input = new Scanner(new File(fileName));
-        table = new HashTableSC(600000);
+        File file = new File(fileName);
+        Scanner input = new Scanner(file);
+
+        //Overestimate with c = 120, observed most dictionary-style text files to contain ~90-120 lines/byte
+        //Should provide a decent table size given the length of the file, although long lines could break it
+        table = new HashTableSC((int) file.length() / 1024 * 120);
 
         while (input.hasNextLine()) {
             table.add(input.nextLine());
@@ -118,6 +135,33 @@ public class SpellChecker {
      * @throws java.io.FileNotFoundException if the specified file is not found
      */
     public HashMap<String, SpellChecker.MyStats> processFile(String fileName) throws FileNotFoundException {
-        throw new UnsupportedOperationException();
+        Scanner fileScanner = new Scanner(new File(fileName));
+        Scanner lineScanner;
+        HashMap<String, MyStats> map = new HashMap<>();
+        int lineNumber = 1;
+
+        String word;
+        while (fileScanner.hasNextLine()) {
+            lineScanner = new Scanner(fileScanner.nextLine());
+            lineScanner.useDelimiter("[^\\w-']+");
+
+            while (lineScanner.hasNext()) {
+                word = lineScanner.next();
+
+                if (map.containsKey(word)) {
+                    MyStats stat = map.get(word);
+                    map.put(word, new MyStats(stat.getLineNumbers(), lineNumber, stat.getOccurrences() + 1, stat.isWord));
+                } else {
+                    map.put(word, new MyStats(new ArrayList<>(), lineNumber, 1, this.isWord(word)));
+                }
+
+            }
+
+            lineNumber++;
+        }
+
+        fileScanner.close();
+
+        return map;
     }
 }

@@ -61,7 +61,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
     @Override
     public boolean add(T element) {
-        int index = element.hashCode() % tableSize();
+        int index = Math.abs(element.hashCode()) % tableSize();
 
         if (contains(element)) { //Already contains the element
             return false;
@@ -94,7 +94,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
     @Override
     public boolean contains(T element) {
-        int index = element.hashCode() % tableSize();
+        int index = Math.abs(element.hashCode()) % tableSize();
         Node current = table[index];
         while (current != null) {
             if (current.value == element) {
