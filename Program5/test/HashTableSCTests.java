@@ -13,6 +13,21 @@ public class HashTableSCTests {
     public HashTableSCTests() {
     }
 
+    @Test
+    public void testCollisions() {
+        System.out.println("Testing collisions...");
+        HashTableSC instance = new HashTableSC(50);
+        long expResult = 8;
+        
+        for (int i = 1; i < 58; i++) {
+            instance.add(i);
+        }
+        
+        Object result = instance.collisions();
+        
+        assertEquals(expResult, result);
+    }
+
     /**
      * Test of add method, of class HashTableSC.
      */
@@ -57,8 +72,8 @@ public class HashTableSCTests {
                 && instance.contains("sally")
                 && instance.contains("paul")
                 && !instance.contains("mike");
-        
-        assertEquals(element, element);
+
+        assertTrue(result);
 
         instance = new HashTableSC(200);
         for (int i = 0; i < 100; i++) {
@@ -176,28 +191,27 @@ public class HashTableSCTests {
         assertEquals(expResult, result);
 
     }
-    
-    @Test(timeout=100000)
-   public void test17_basicCollisionsMaxCollisions() {
-      HashTableSC<Integer> table = new HashTableSC<Integer>(100);
 
-      for (int i = 0; i < 101; i++) {
-         assertTrue(table.add(i));
-      }   
-      table.add(101);
-      assertEquals(1, table.collisions());
-      assertEquals(1, table.maxCollisions());
-      table.add(102);
-      assertEquals(2, table.collisions());
-      assertEquals(1, table.maxCollisions());
-      table.add(202);
-      assertEquals(4, table.collisions());
-      assertEquals(2, table.maxCollisions());
-      table.add(202);
-      assertEquals(7, table.collisions());
-      assertEquals(3, table.maxCollisions());
-     
+    @Test(timeout = 100000)
+    public void test17_basicCollisionsMaxCollisions() {
+        HashTableSC<Integer> table = new HashTableSC<Integer>(100);
 
-   }
+        for (int i = 0; i < 101; i++) {
+            assertTrue(table.add(i));
+        }
+        table.add(101);
+        assertEquals(1, table.collisions());
+        assertEquals(1, table.maxCollisions());
+        table.add(102);
+        assertEquals(2, table.collisions());
+        assertEquals(1, table.maxCollisions());
+        table.add(202);
+        assertEquals(4, table.collisions());
+        assertEquals(2, table.maxCollisions());
+        table.add(202);
+        assertEquals(7, table.collisions());
+        assertEquals(3, table.maxCollisions());
+
+    }
 
 }

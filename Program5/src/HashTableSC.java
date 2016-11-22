@@ -63,55 +63,52 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean add(T element) {
         int index = Math.abs(element.hashCode()) % tableSize();
 
-        boolean contains = false;
-        Node current = table[index];
-        while (current != null) {
-            if (current.value == element) {
-                contains = !current.removed;
-                break;
-            }
-            current = current.next;
-        }
-
-        if (contains) { //Already contains the element
-            return false;
-        } else if (table[index] == null || table[index].removed) { //No element at the given position
+        if (table[index] == null) {
             table[index] = new Node(index, element);
-        } else { //Collision
-            current = table[index];
+            size++;
+            return true;
+        } else {
+            Node current = table[index];
             int curCol = 1;
             collisions++;
-            while (current.next != null) {
-                collisions++;
-                curCol++;
-                current = current.next;
-                if (current.removed) {
-                    Node temp = current.next;
-                    current = new Node(index, element);
-                    current.next = temp;
+
+            while (current != null) {
+                if (current.value.equals(element)) {
+                    return false;
+                } else {
+                    current = current.next;
+                    collisions++;
+                    curCol++;
                 }
             }
 
-            current.next = new Node(index, element);
+            current = table[index];
+            table[index] = new Node(index, element);
+            table[index].next = current;
 
             if (curCol > maxCollisions) {
                 maxCollisions = curCol;
             }
+            size++;
+            return true;
         }
-
-        size++;
-        return true;
     }
 
     @Override
     public boolean contains(T element) {
         int index = Math.abs(element.hashCode()) % tableSize();
-        Node current = table[index];
-        while (current != null) {
-            if (current.value.equals(element)) {
-                return !current.removed;
+
+        if (table[index] == null) {
+            return false;
+        } else {
+            Node current = table[index];
+            while (current != null) {
+                if (current.value.equals(element)) {
+                    return true;
+                } else {
+                    current = current.next;
+                }
             }
-            current = current.next;
         }
 
         return false;
@@ -131,17 +128,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean remove(T element) {
         int index = element.hashCode() % tableSize();
 
-        if (!contains(element)) {
-            return false;
-        } else {
-            Node current = table[index];
-            while (current.value != element) {
-                current = current.next;
-            }
-            current.removed = true;
-            size--;
-            return true;
-        }
+        return false;
     }
 
     @Override
