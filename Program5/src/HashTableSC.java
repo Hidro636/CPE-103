@@ -128,6 +128,25 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean remove(T element) {
         int index = element.hashCode() % tableSize();
 
+        if (table[index] == null) {
+            return false;
+        } else if (table[index].value.equals(element)) {
+            table[index] = table[index].next;
+            size--;
+            return true;
+        } else {
+            Node current = table[index];
+            while (current.next != null) {
+                if (current.next.value.equals(element)) {
+                    current.next = current.next.next;
+                    size--;
+                    return true;
+                } else {
+                    current = current.next;
+                }
+            }
+        }
+
         return false;
     }
 
