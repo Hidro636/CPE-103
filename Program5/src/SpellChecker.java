@@ -89,12 +89,15 @@ public class SpellChecker {
 
         //Overestimate with c = 120, observed most dictionary-style text files to contain ~90-120 lines/byte
         //Should provide a decent table size given the length of the file, although long lines could break it
-        table = new HashTableSC((int) file.length() / 1024 * 120);
+        //table = new HashTableSC((int) file.length() / 1024 * 120);
+        table = new HashTableSC(600000);
 
         while (input.hasNextLine()) {
-            table.add(input.nextLine());
+            String line = input.nextLine();
+            System.out.println("Added " + line);
+            table.add(line);
         }
-
+        System.out.println(table.contains("cow"));
         input.close();
 
     }
@@ -110,7 +113,7 @@ public class SpellChecker {
      * dictionary
      */
     public boolean isWord(String s) {
-        return table.contains(s) || table.contains(s.toLowerCase());
+        return table.contains(s) /*|| table.contains(s.toLowerCase())*/;
     }
 
     /**

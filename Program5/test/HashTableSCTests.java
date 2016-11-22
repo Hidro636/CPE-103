@@ -39,13 +39,26 @@ public class HashTableSCTests {
         Object element = "john";
         HashTableSC instance = new HashTableSC(100);
         boolean expResult = false;
-        boolean result = instance.contains(element);
+        boolean result = instance.contains("john");
         assertEquals(expResult, result);
 
         expResult = true;
         instance.add("john");
-        result = instance.contains(element);
+        result = instance.contains("john");
         assertEquals(expResult, result);
+
+        instance.add("phil");
+        instance.add("paul");
+        instance.add("luke");
+        instance.add("kristen");
+        instance.add("sally");
+
+        result = instance.contains("luke")
+                && instance.contains("sally")
+                && instance.contains("paul")
+                && !instance.contains("mike");
+        
+        assertEquals(element, element);
 
         instance = new HashTableSC(200);
         for (int i = 0; i < 100; i++) {
