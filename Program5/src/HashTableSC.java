@@ -63,13 +63,22 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean add(T element) {
         int index = Math.abs(element.hashCode()) % tableSize();
 
-        if (contains(element)) { //Already contains the element
-            collisions++;
+        boolean contains = false;
+        Node current = table[index];
+        while (current != null) {
+            if (current.value == element) {
+                contains = !current.removed;
+                break;
+            }
+            current = current.next;
+        }
+
+        if (contains) { //Already contains the element
             return false;
         } else if (table[index] == null || table[index].removed) { //No element at the given position
             table[index] = new Node(index, element);
         } else { //Collision
-            Node current = table[index];
+            current = table[index];
             int curCol = 1;
             collisions++;
             while (current.next != null) {
