@@ -70,6 +70,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         } else { //Collision
             Node current = table[index];
             int curCol = 1;
+            collisions++;
             while (current.next != null) {
                 collisions++;
                 curCol++;
@@ -80,7 +81,6 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
                     current.next = temp;
                 }
             }
-            
 
             current.next = new Node(index, element);
 
