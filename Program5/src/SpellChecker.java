@@ -94,10 +94,8 @@ public class SpellChecker {
 
         while (input.hasNextLine()) {
             String line = input.nextLine();
-            System.out.println("Added " + line);
             table.add(line);
         }
-        System.out.println(table.contains("cow"));
         input.close();
 
     }
