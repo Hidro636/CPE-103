@@ -77,8 +77,11 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
                     return false;
                 } else {
                     current = current.next;
-                    collisions++;
-                    curCol++;
+
+                    if (current.next != null) {
+                        collisions++;
+                        curCol++;
+                    }
                 }
             }
 
