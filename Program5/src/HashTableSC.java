@@ -64,6 +64,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         int index = Math.abs(element.hashCode()) % tableSize();
 
         if (contains(element)) { //Already contains the element
+            collisions++;
             return false;
         } else if (table[index] == null || table[index].removed) { //No element at the given position
             table[index] = new Node(index, element);
@@ -98,7 +99,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         int index = Math.abs(element.hashCode()) % tableSize();
         Node current = table[index];
         while (current != null) {
-            if (current.value.equals(element)) {
+            if (current.value == element) {
                 return !current.removed;
             }
             current = current.next;
