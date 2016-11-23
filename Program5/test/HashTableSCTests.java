@@ -142,7 +142,7 @@ public class HashTableSCTests {
     public void testRemove() {
         System.out.println("Testing remove()...");
         Object element = "sam";
-        HashTableSC instance = new HashTableSC(100);
+        HashTableSC instance = new HashTableSC(5);
         boolean expResult = false;
         boolean result = instance.remove(element);
         assertEquals(expResult, result);
@@ -152,10 +152,12 @@ public class HashTableSCTests {
         instance.add("sarah");
         instance.add("sam");
 
+        //instance._print();
         expResult = true;
         result = instance.remove(element);
         assertEquals(expResult, result);
 
+        //instance._print();
         expResult = false;
         result = instance.remove(element);
         assertEquals(expResult, result);
@@ -213,6 +215,27 @@ public class HashTableSCTests {
         assertEquals(7, table.collisions());
         assertEquals(3, table.maxCollisions());
 
+    }
+
+    @Test(timeout = 100000)
+    public void test18_largeAddWithDuplicates() {
+        HashTableSC<Integer> table = new HashTableSC<Integer>(100);
+        for (int i = 0; i < 101; i++) {
+            System.out.println("Iteration: " + i);
+            assertTrue(table.add(i));
+            assertFalse(table.add(i));
+
+            assertFalse(table.isEmpty());
+            assertEquals(i + 1, table.size());
+            assertEquals(101, table.tableSize());
+            assertEquals((i + 1.0) / 101, table.loadFactor(), 0.000001);
+            assertEquals(i + 1, table.collisions());
+            assertEquals(1, table.maxCollisions());
+        }
+
+        for (int i = 0; i < 101; i++) {
+            assertTrue(table.contains(i));
+        }
     }
 
 }

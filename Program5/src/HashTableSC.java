@@ -48,9 +48,9 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         } else {
             table = new HashTableSC.Node[PrimeTools.nextPrime(tableSize)];
         }
-        
+
         collisions = 0;
-        maxCollisions = 0;
+        maxCollisions = 1;
     }
 
     @Override
@@ -74,13 +74,12 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         } else {
             Node current = table[index];
             int curCol = 1;
-
+            collisions++;
             while (current != null) {
                 if (current.value.equals(element)) {
                     return false;
                 } else {
                     current = current.next;
-
                     collisions++;
                     curCol++;
                 }
@@ -164,14 +163,16 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         return this.table.length;
     }
 
-//    @Deprecated
-//    public void _print() {
-//        for (Node n : table) {
-//            while (n != null) {
-//                System.out.print(n.value + "-");
-//                n = n.next;
-//            }
-//            System.out.println("null");
-//        }
-//    }
+    @Deprecated
+    public void _print() {
+        for (Node n : table) {
+            while (n != null) {
+                System.out.print(n.value + "-");
+                n = n.next;
+            }
+            System.out.println("null");
+        }
+
+        System.out.println("~~~~~~~~~~~~\n");
+    }
 }
