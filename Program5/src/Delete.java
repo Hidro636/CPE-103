@@ -14,7 +14,9 @@ import java.util.HashMap;
 public class Delete {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-         System.out.println(11 % 10);
-
+        System.out.println(100 % 101);
+        System.out.println(101 % 101);
+        System.out.println(102 % 101);
+        System.out.println(202 % 101);
     }
 }

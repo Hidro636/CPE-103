@@ -67,6 +67,41 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean add(T element) {
         int index = Math.abs(element.hashCode()) % tableSize();
 
+        if (table[index] == null) {
+            size++;
+            table[index] = new Node(index, element);
+            return true;
+        } else {
+            Node current = table[index];
+            int curCol = 0;
+
+            boolean contains = false;
+            do {
+                collisions++;
+                curCol++;
+
+                if (curCol > maxCollisions) {
+                    maxCollisions = curCol;
+                }
+
+                if (current.value.equals(element)) {
+                    contains = true;
+                }
+                current = current.next;
+
+            } while (current != null);
+
+            if (contains) {
+                return false;
+            }
+
+            current = table[index];
+            table[index] = new Node(index, element);
+            table[index].next = current;
+            size++;
+            return true;
+        }
+
         //<editor-fold defaultstate="collapsed" desc="Old">
         /*if (table[index] == null) {
         table[index] = new Node(index, element);
@@ -170,16 +205,16 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         return this.table.length;
     }
 
-//    @Deprecated
-//    public void _print() {
-//        for (Node n : table) {
-//            while (n != null) {
-//                System.out.print(n.value + "-");
-//                n = n.next;
-//            }
-//            System.out.println("null");
-//        }
-//
-//        System.out.println("~~~~~~~~~~~~\n");
-//    }
+    @Deprecated
+    public void _print() {
+        for (Node n : table) {
+            while (n != null) {
+                System.out.print(n.value + "-");
+                n = n.next;
+            }
+            System.out.println("null");
+        }
+
+        System.out.println("~~~~~~~~~~~~\n");
+    }
 }

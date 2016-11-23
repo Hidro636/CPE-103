@@ -212,6 +212,7 @@ public class HashTableSCTests {
         assertEquals(4, table.collisions());
         assertEquals(2, table.maxCollisions());
         table.add(202);
+        table._print();
         assertEquals(7, table.collisions());
         assertEquals(3, table.maxCollisions());
 
