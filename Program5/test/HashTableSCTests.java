@@ -25,7 +25,7 @@ public class HashTableSCTests {
 
         Object result = instance.collisions();
 
-        instance._print();
+        //instance._print();
         assertEquals(expResult, result);
     }
 
