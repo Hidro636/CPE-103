@@ -16,15 +16,16 @@ public class HashTableSCTests {
     @Test
     public void testCollisions() {
         System.out.println("Testing collisions...");
-        HashTableSC instance = new HashTableSC(50);
-        long expResult = 8;
+        HashTableSC instance = new HashTableSC(10);
+        long expResult = 4;
 
-        for (int i = 1; i < 58; i++) {
+        for (int i = 0; i < 15; i++) {
             instance.add(i);
         }
 
         Object result = instance.collisions();
 
+        instance._print();
         assertEquals(expResult, result);
     }
 

@@ -76,7 +76,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
                     return false;
                 } else {
                     current = current.next;
-                    
+
                     collisions++;
                     curCol++;
                 }
@@ -158,5 +158,16 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     @Override
     public int tableSize() {
         return this.table.length;
+    }
+
+    @Deprecated
+    public void _print() {
+        for (Node n : table) {
+            while (n != null) {
+                System.out.print(n.value + "-");
+                n = n.next;
+            }
+            System.out.println("null");
+        }
     }
 }
