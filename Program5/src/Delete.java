@@ -18,5 +18,7 @@ public class Delete {
         System.out.println(101 % 101);
         System.out.println(102 % 101);
         System.out.println(202 % 101);
+        
+        System.out.println("cow".equals("Cow"));
     }
 }

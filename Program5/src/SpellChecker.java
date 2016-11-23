@@ -111,7 +111,7 @@ public class SpellChecker {
      * dictionary
      */
     public boolean isWord(String s) {
-        return table.contains(s) /*|| table.contains(s.toLowerCase())*/;
+        return table.contains(s) || table.contains(s.toLowerCase());
     }
 
     /**

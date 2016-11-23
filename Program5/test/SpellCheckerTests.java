@@ -25,11 +25,8 @@ public class SpellCheckerTests {
         boolean expResult = true;
         boolean result = instance.isWord(s);
         assertEquals(expResult, result);
-        
-        
+
     }
-    
-    
 
     /**
      * Test of getDictionary method, of class SpellChecker.
@@ -58,6 +55,27 @@ public class SpellCheckerTests {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    private static final SpellChecker dict;
+
+    static {
+        try {
+            dict = new SpellChecker();
+        } catch (FileNotFoundException e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    @Test(timeout = 100000)
+    public void test11_isWordCapitalisedNonPropers() {
+        String[] strings = {"Aardwolf", "Computer", "Science", "Math",
+            "Spelling", "Bookkeeper", "Scientificophilosophical", "Zythum"};
+
+        for (String str : strings) {
+            assertTrue(str + " is a word", dict.isWord(str));
+            
+        }
     }
 
 }

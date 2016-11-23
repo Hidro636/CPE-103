@@ -196,57 +196,6 @@ public class HashTableSCTests {
 
     }
 
-    @Test(timeout = 100000)
-    public void test17_basicCollisionsMaxCollisions() {
-        HashTableSC<Integer> table = new HashTableSC<Integer>(100);
-
-        for (int i = 0; i < 101; i++) {
-            assertTrue(table.add(i));
-        }
-        table.add(101);
-        assertEquals(1, table.collisions());
-        assertEquals(1, table.maxCollisions());
-        table.add(102);
-        assertEquals(2, table.collisions());
-        assertEquals(1, table.maxCollisions());
-        table.add(202);
-        assertEquals(4, table.collisions());
-        assertEquals(2, table.maxCollisions());
-        table.add(202);
-        //table._print();
-        assertEquals(7, table.collisions());
-        assertEquals(3, table.maxCollisions());
-
-    }
     
-    @Test(timeout=100000)
-   public void test22_randomOperations() {
-      int size = 100000;
-      HashSet<Integer> hashLib = new HashSet<Integer>();
-      HashTableSC<Integer> hashUnderTest = new HashTableSC<Integer>(size);
-      Integer[] a = new Integer[size];
-      Random rand = new Random(-1234);
-
-      for (int i = 0; i < size; i++) {
-         a[i]= rand.nextInt(200) - 100;
-         assertEquals(hashLib.contains(a[i]), hashUnderTest.contains(a[i]));
-         assertEquals(hashLib.add(a[i]), hashUnderTest.add(a[i]));
-         assertEquals(hashLib.add(a[i]), hashUnderTest.add(a[i]));
-         assertEquals(hashLib.contains(a[i]), hashUnderTest.contains(a[i]));
-         assertEquals(hashLib.size(), hashUnderTest.size());
-      }
-
-      for (int i = 0; i < size; i++) {
-         Integer num = rand.nextInt();
-         assertEquals(hashLib.remove(num), hashUnderTest.remove(num));
-
-         assertEquals(hashLib.contains(a[i]), hashUnderTest.contains(a[i]));
-         assertEquals(hashLib.remove(a[i]), hashUnderTest.remove(a[i]));
-         assertEquals(hashLib.contains(a[i]), hashUnderTest.contains(a[i]));
-         assertEquals(hashLib.remove(a[i]), hashUnderTest.remove(a[i]));
-         assertEquals(hashLib.contains(a[i]), hashUnderTest.contains(a[i]));
-         assertEquals(hashLib.size(), hashUnderTest.size());
-      }
-   }
 
 }
