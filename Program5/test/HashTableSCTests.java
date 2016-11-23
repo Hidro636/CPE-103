@@ -197,6 +197,7 @@ public class HashTableSCTests {
 
     @Test(timeout = 100000)
     public void test17_basicCollisionsMaxCollisions() {
+        System.out.println("17 ----------------------------------");
         HashTableSC<Integer> table = new HashTableSC<Integer>(100);
 
         for (int i = 0; i < 101; i++) {
@@ -214,6 +215,7 @@ public class HashTableSCTests {
         table.add(202);
         assertEquals(7, table.collisions());
         assertEquals(3, table.maxCollisions());
+        System.out.println("-----------------------------------------");
 
     }
 
