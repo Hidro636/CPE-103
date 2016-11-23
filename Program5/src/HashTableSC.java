@@ -74,7 +74,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         } else {
             Node current = table[index];
             int curCol = 1;
-            System.out.println("Collided!");
+            //System.out.println("Collided!");
             collisions++;
             while (current != null) {
                 if (current.value.equals(element)) {
@@ -84,7 +84,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
                     return false;
                 } else {
                     current = current.next;
-                    System.out.println("Collided!");
+                    //System.out.println("Collided!");
                     collisions++;
                     curCol++;
                 }
