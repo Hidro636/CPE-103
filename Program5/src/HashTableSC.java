@@ -67,39 +67,41 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
     public boolean add(T element) {
         int index = Math.abs(element.hashCode()) % tableSize();
 
-        if (table[index] == null) {
-            table[index] = new Node(index, element);
-            size++;
-            return true;
+        //<editor-fold defaultstate="collapsed" desc="Old">
+        /*if (table[index] == null) {
+        table[index] = new Node(index, element);
+        size++;
+        return true;
         } else {
-            Node current = table[index];
-            int curCol = 1;
-            //System.out.println("Collided!");
-            collisions++;
-            while (current != null) {
-                if (current.value.equals(element)) {
-                    if (curCol > maxCollisions) {
-                        maxCollisions = curCol;
-                    }
-                    return false;
-                } else {
-                    current = current.next;
-                    //System.out.println("Collided!");
-                    collisions++;
-                    curCol++;
-                }
-            }
-
-            current = table[index];
-            table[index] = new Node(index, element);
-            table[index].next = current;
-
-            if (curCol > maxCollisions) {
-                maxCollisions = curCol;
-            }
-            size++;
-            return true;
+        Node current = table[index];
+        int curCol = 0;
+        while (current != null) {
+        collisions++;
+        curCol++;
+        if (current.value.equals(element)) {
+        collisions++;
+        curCol++;
+        if (curCol > maxCollisions) {
+        maxCollisions = curCol;
         }
+        return false;
+        } else {
+        current = current.next;
+        
+        }
+        }
+        
+        current = table[index];
+        table[index] = new Node(index, element);
+        table[index].next = current;
+        
+        if (curCol > maxCollisions) {
+        maxCollisions = curCol;
+        }
+        size++;
+        return true;
+        }*/
+//</editor-fold>
     }
 
     @Override

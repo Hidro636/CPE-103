@@ -197,7 +197,6 @@ public class HashTableSCTests {
 
     @Test(timeout = 100000)
     public void test17_basicCollisionsMaxCollisions() {
-        System.out.println("17 ----------------------------------");
         HashTableSC<Integer> table = new HashTableSC<Integer>(100);
 
         for (int i = 0; i < 101; i++) {
@@ -215,29 +214,9 @@ public class HashTableSCTests {
         table.add(202);
         assertEquals(7, table.collisions());
         assertEquals(3, table.maxCollisions());
-        System.out.println("-----------------------------------------");
 
     }
 
-    @Test(timeout = 100000)
-    public void test18_largeAddWithDuplicates() {
-        HashTableSC<Integer> table = new HashTableSC<Integer>(100);
-        for (int i = 0; i < 101; i++) {
-            System.out.println("Iteration: " + i);
-            assertTrue(table.add(i));
-            assertFalse(table.add(i));
-
-            assertFalse(table.isEmpty());
-            assertEquals(i + 1, table.size());
-            assertEquals(101, table.tableSize());
-            assertEquals((i + 1.0) / 101, table.loadFactor(), 0.000001);
-            assertEquals(i + 1, table.collisions());
-            assertEquals(1, table.maxCollisions());
-        }
-
-        for (int i = 0; i < 101; i++) {
-            assertTrue(table.contains(i));
-        }
-    }
+    
 
 }
