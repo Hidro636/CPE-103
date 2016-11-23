@@ -70,7 +70,6 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         } else {
             Node current = table[index];
             int curCol = 1;
-            collisions++;
 
             while (current != null) {
                 if (current.value.equals(element)) {

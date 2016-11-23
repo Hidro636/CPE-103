@@ -18,13 +18,13 @@ public class HashTableSCTests {
         System.out.println("Testing collisions...");
         HashTableSC instance = new HashTableSC(50);
         long expResult = 8;
-        
+
         for (int i = 1; i < 58; i++) {
             instance.add(i);
         }
-        
+
         Object result = instance.collisions();
-        
+
         assertEquals(expResult, result);
     }
 
