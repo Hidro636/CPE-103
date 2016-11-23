@@ -23,23 +23,10 @@ public class SpellCheckerTests {
         String s = "monkey";
         SpellChecker instance = new SpellChecker("smalldictionary.txt");
         boolean expResult = true;
-        boolean result = instance.isWord(s);
+        boolean result = instance.isWord(s) && instance.isWord(s.toUpperCase());
         assertEquals(expResult, result);
 
-    }
-
-    /**
-     * Test of getDictionary method, of class SpellChecker.
-     */
-    @Test
-    public void testGetDictionary() throws FileNotFoundException {
-        System.out.println("getDictionary");
-        SpellChecker instance = new SpellChecker();
-        HashTableSC<String> expResult = null;
-        HashTableSC<String> result = instance.getDictionary();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(instance.isWord("cereal"));
     }
 
     /**
@@ -48,34 +35,13 @@ public class SpellCheckerTests {
     @Test
     public void testProcessFile() throws Exception {
         System.out.println("processFile");
-        String fileName = "";
+        String fileName = "test.txt";
         SpellChecker instance = new SpellChecker();
-        HashMap<String, SpellChecker.MyStats> expResult = null;
         HashMap<String, SpellChecker.MyStats> result = instance.processFile(fileName);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    private static final SpellChecker dict;
-
-    static {
-        try {
-            dict = new SpellChecker();
-        } catch (FileNotFoundException e) {
-            throw new ExceptionInInitializerError(e);
-        }
-    }
-
-    @Test(timeout = 100000)
-    public void test11_isWordCapitalisedNonPropers() {
-        String[] strings = {"Aardwolf", "Computer", "Science", "Math",
-            "Spelling", "Bookkeeper", "Scientificophilosophical", "Zythum"};
-
-        for (String str : strings) {
-            assertTrue(str + " is a word", dict.isWord(str));
-            
-        }
+        assertEquals(result.get("this").getOccurrences(), 5);
+        assertArrayEquals(new Object[]{1, 1, 3, 3, 4}, result.get("this").getLineNumbers().toArray());
+        assertTrue(result.get("this").isWord());
     }
 
 }
