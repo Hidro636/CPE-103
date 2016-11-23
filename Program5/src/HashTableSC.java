@@ -171,7 +171,7 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
 
     @Override
     public boolean remove(T element) {
-        int index = element.hashCode() % tableSize();
+        int index = Math.abs(element.hashCode()) % tableSize();
 
         if (table[index] == null) {
             return false;
@@ -205,16 +205,16 @@ public class HashTableSC<T> implements HashMetrics, HashTable<T> {
         return this.table.length;
     }
 
-    @Deprecated
-    public void _print() {
-        for (Node n : table) {
-            while (n != null) {
-                System.out.print(n.value + "-");
-                n = n.next;
-            }
-            System.out.println("null");
-        }
-
-        System.out.println("~~~~~~~~~~~~\n");
-    }
+//    @Deprecated
+//    public void _print() {
+//        for (Node n : table) {
+//            while (n != null) {
+//                System.out.print(n.value + "-");
+//                n = n.next;
+//            }
+//            System.out.println("null");
+//        }
+//
+//        System.out.println("~~~~~~~~~~~~\n");
+//    }
 }
