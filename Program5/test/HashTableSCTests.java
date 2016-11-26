@@ -1,5 +1,4 @@
 
-import java.util.HashSet;
 import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
