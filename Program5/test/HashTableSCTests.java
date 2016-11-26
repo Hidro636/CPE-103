@@ -167,7 +167,7 @@ public class HashTableSCTests {
     /**
      * Test of size method, of class HashTableSC.
      */
-    @Test
+    @Test(timeout = 1000)
     public void testSize() {
         System.out.println("Testing size()...");
         HashTableSC instance = new HashTableSC(100);
