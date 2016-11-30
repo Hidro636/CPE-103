@@ -1,0 +1,24 @@
+Heap Sort:
+	2500 elements	(observed):	16ms
+	5000 elements	(observed):	10ms
+	10000 elements	(observed):	16ms
+	20000 elements	(observed):	47ms
+	500000 elements	(observed):	776ms
+	1000000 elements	(observed):	1434ms
+
+Shell Sort:
+	2500 elements	(observed):	4ms
+	5000 elements	(observed):	5ms
+	10000 elements	(observed):	26ms
+	20000 elements	(observed):	20ms
+	500000 elements	(observed):	14638ms
+	1000000 elements	(observed):	86356ms
+
+Heap Sort:
+	2500 elements	(observed):	24ms
+	5000 elements	(observed):	21ms
+	10000 elements	(observed):	12ms
+	20000 elements	(observed):	57ms
+	500000 elements	(observed):	1150ms
+	1000000 elements	(observed):	2395ms
+

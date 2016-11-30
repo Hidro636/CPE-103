@@ -1,8 +1,5 @@
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.util.Random;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,35 +10,91 @@ import static org.junit.Assert.*;
  */
 public class ShellSortsTests {
 
+    private final int SEED = 1337;
+    private final int SIZE = 1000000;
+
     public ShellSortsTests() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+    /**
+     * Test of heapSort method, of class ShellSorts.
+     */
+    @Test
+    public void testHeapSort() {
+        System.out.println("Testing heapSort()...");
+        Comparable[] array = new Integer[SIZE];
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
+        Random r = new Random(SEED);
+        for (int i = 0; i < SIZE; i++) {
+            array[i] = r.nextInt();
+        }
 
-    @Before
-    public void setUp() {
-    }
+        ShellSorts.heapSort(array);
 
-    @After
-    public void tearDown() {
+        for (int i = 0; i < SIZE - 1; i++) {
+            assertTrue(array[i].compareTo(array[i + 1]) < 0);
+        }
     }
 
     /**
-     * Test of test method, of class ShellSorts.
+     * Test of hibbard method, of class ShellSorts.
      */
     @Test
-    public void testTest() {
-        System.out.println("test");
-        ShellSorts instance = new ShellSorts();
-        instance.test();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testHibbard() {
+        System.out.println("Testing hibbard()...");
+        Comparable[] array = new Integer[SIZE];
+
+        Random r = new Random(SEED);
+        for (int i = 0; i < SIZE; i++) {
+            array[i] = r.nextInt();
+        }
+
+        ShellSorts.hibbard(array);
+
+        for (int i = 0; i < SIZE - 1; i++) {
+            assertTrue(array[i].compareTo(array[i + 1]) < 0);
+        }
+
+    }
+
+    /**
+     * Test of sedgewick method, of class ShellSorts.
+     */
+    @Test
+    public void testSedgewick() {
+        System.out.println("Testing sedgewick()...");
+        Comparable[] array = new Integer[SIZE];
+
+        Random r = new Random(SEED);
+        for (int i = 0; i < SIZE; i++) {
+            array[i] = r.nextInt();
+        }
+
+        ShellSorts.sedgewick(array);
+
+        for (int i = 0; i < SIZE - 1; i++) {
+            assertTrue(array[i].compareTo(array[i + 1]) < 0);
+        }
+    }
+
+    /**
+     * Test of shell method, of class ShellSorts.
+     */
+    @Test
+    public void testShell() {
+        System.out.println("Testing shell()...");
+        Comparable[] array = new Integer[SIZE];
+
+        Random r = new Random(SEED);
+        for (int i = 0; i < SIZE; i++) {
+            array[i] = r.nextInt();
+        }
+
+        ShellSorts.shell(array);
+
+        for (int i = 0; i < SIZE - 1; i++) {
+            assertTrue(array[i].compareTo(array[i + 1]) < 0);
+        }
     }
 
 }
