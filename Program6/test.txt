@@ -1,0 +1,3 @@
+this is some text
+that will be compressed
+by the program we're making

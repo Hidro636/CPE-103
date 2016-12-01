@@ -18,10 +18,15 @@ public class Timer {
     private static long end;
 
     public static void main(String[] args) throws FileNotFoundException {
-        timeHeapSort();
+
+        long start;
+        long end;
+        Integer[] ints = new Integer[5];
+
+        //timeHeapSort();
         //timeShellSort();
         //timeHibbard();
-        timeSedgewick();
+        //timeSedgewick();
     }
 
     private static void timeHeapSort() throws FileNotFoundException {

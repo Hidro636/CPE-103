@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class ShellSortsTests {
 
     private final int SEED = 1337;
-    private final int SIZE = 1000000;
+    private final int SIZE = 100000;
 
     public ShellSortsTests() {
     }
