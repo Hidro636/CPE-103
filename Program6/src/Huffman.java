@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -53,9 +52,9 @@ public class Huffman {
 
     private class Node implements Comparable<Node> {
 
-        private char character;
-        private int frequency;
-        private Node left, right;
+        private final char character;
+        private final int frequency;
+        private final Node left, right;
 
         public Node(char character, int frequency) {
             this.character = character;
@@ -93,21 +92,20 @@ public class Huffman {
 
         HashMap<Character, Integer> frequencies = new HashMap<>(100);
 
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        while (reader.ready()) {
-            char c = (char) reader.read();
-            if (frequencies.containsKey(c)) {
-                frequencies.put(c, frequencies.get(c) + 1);
-            } else {
-                frequencies.put(c, 1);
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            while (reader.ready()) {
+                char c = (char) reader.read();
+                if (frequencies.containsKey(c)) {
+                    frequencies.put(c, frequencies.get(c) + 1);
+                } else {
+                    frequencies.put(c, 1);
+                }
             }
         }
 
-        reader.close();
-
-        for (Map.Entry<Character, Integer> entry : frequencies.entrySet()) {
+        frequencies.entrySet().forEach((entry) -> {
             queue.add(new Node(entry.getKey(), entry.getValue()));
-        }
+        });
 
         while (queue.size() > 1) {
             queue.add(new Node(queue.poll(), queue.poll()));
@@ -132,32 +130,30 @@ public class Huffman {
         }
     }
 
-    public void compress(String inFileName, String outFileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(inFileName));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
-
-        while (reader.ready()) {
-            writer.write(dictionary.getValue((char) reader.read()));
+    public void compress(String inFileName, String outFileName) throws IOException, FileNotFoundException {
+        BufferedWriter writer;
+        try (BufferedReader reader = new BufferedReader(new FileReader(inFileName))) {
+            writer = new BufferedWriter(new FileWriter(outFileName));
+            while (reader.ready()) {
+                writer.write(dictionary.getValue((char) reader.read()));
+            }
         }
-
-        reader.close();
         writer.close();
     }
 
-    public void decompress(String inFileName, String outFileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(inFileName));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(outFileName));
-
-        String current = "";
-        while (reader.ready()) {
-            current += (char) reader.read();
-            if (dictionary.containsValue(current)) {
-                writer.write(dictionary.getKey(current));
-                current = "";
+    public void decompress(String inFileName, String outFileName) throws IOException, FileNotFoundException {
+        BufferedWriter writer;
+        try (BufferedReader reader = new BufferedReader(new FileReader(inFileName))) {
+            writer = new BufferedWriter(new FileWriter(outFileName));
+            String current = "";
+            while (reader.ready()) {
+                current += (char) reader.read();
+                if (dictionary.containsValue(current)) {
+                    writer.write(dictionary.getKey(current));
+                    current = "";
+                }
             }
         }
-
-        reader.close();
         writer.close();
     }
 

@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,7 +31,7 @@ public class HuffmanTests {
      * Test of decompress method, of class Huffman.
      */
     @Test
-    public void testDecompress() {
+    public void testDecompress() throws IOException {
         System.out.println("decompress");
         String inFileName = "";
         String outFileName = "";
