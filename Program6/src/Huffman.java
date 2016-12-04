@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 /**
+ * A class that provides compression/decompression functions using Huffman
+ * encoding
  *
  * @author Lucas Robertson
  * @version Program 6
@@ -16,14 +18,14 @@ import java.util.PriorityQueue;
 public class Huffman {
 
     private Node root;
-    private BidiMap<Character, String> dictionary;
+    private BidirectionalMap<Character, String> dictionary;
 
-    private class BidiMap<K, V> {
+    private class BidirectionalMap<K, V> {
 
         private HashMap<K, V> keyValue;
         private HashMap<V, K> valueKey;
 
-        public BidiMap() {
+        public BidirectionalMap() {
             keyValue = new HashMap<>();
             valueKey = new HashMap<>();
         }
@@ -86,9 +88,18 @@ public class Huffman {
         }
     }
 
+    /**
+     * Creates and initializes a Huffman object with the frequencies from the
+     * specified file
+     *
+     * @param fileName the name of the file from which frequencies will be
+     * determined
+     * @throws FileNotFoundException if the specified file does not exist
+     * @throws IOException if an I/O error occurs
+     */
     public Huffman(String fileName) throws FileNotFoundException, IOException {
         PriorityQueue<Node> queue = new PriorityQueue<>();
-        dictionary = new BidiMap<>();
+        dictionary = new BidirectionalMap<>();
 
         HashMap<Character, Integer> frequencies = new HashMap<>(100);
 
@@ -130,6 +141,15 @@ public class Huffman {
         }
     }
 
+    /**
+     * Compresses the text in the specified input file using the codes generated
+     * at construction
+     *
+     * @param inFileName the name of the file to compress
+     * @param outFileName the name of the file to contain the compressed text
+     * @throws IOException if an I/O error occurs
+     * @throws FileNotFoundException if the specified input file does not exist
+     */
     public void compress(String inFileName, String outFileName) throws IOException, FileNotFoundException {
         BufferedWriter writer;
         try (BufferedReader reader = new BufferedReader(new FileReader(inFileName))) {
@@ -141,6 +161,15 @@ public class Huffman {
         writer.close();
     }
 
+    /**
+     * Decompresses the codes in the specified file using the codes generated at
+     * construction
+     *
+     * @param inFileName the name of the file to decompress
+     * @param outFileName the name of the file to contain the decompressed text
+     * @throws IOException if an I/O error occurs
+     * @throws FileNotFoundException if the specified input file does not exist
+     */
     public void decompress(String inFileName, String outFileName) throws IOException, FileNotFoundException {
         BufferedWriter writer;
         try (BufferedReader reader = new BufferedReader(new FileReader(inFileName))) {
@@ -165,7 +194,6 @@ public class Huffman {
     private String preOrder(Node node, String string) {
 
         if (node.character != Character.MIN_VALUE) {
-            System.out.println(node.character);
             string += node.character;
         }
 

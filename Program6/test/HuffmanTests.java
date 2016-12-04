@@ -1,4 +1,7 @@
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,13 +21,44 @@ public class HuffmanTests {
      */
     @Test
     public void testCompress() throws Exception {
-        System.out.println("compress");
-        String inFileName = "";
-        String outFileName = "";
-        Huffman instance = null;
+        System.out.println("Testing compress()...");
+        String inFileName = "textfile.txt";
+        String outFileName = "textfile_compressed.txt";
+        Huffman instance = new Huffman("textfile.txt");
         instance.compress(inFileName, outFileName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        //Cleanup
+        File file = new File(outFileName);
+        file.delete();
+    }
+
+    @Test
+    public void testCompressTime() throws IOException {
+        System.out.println("Testing compress() time...");
+        String smallFile = "war.txt";
+        String largeFile = "rockyou.txt";
+
+        long start, end, smallTime, largeTime;
+        Huffman huffman = new Huffman(smallFile);
+
+        start = System.currentTimeMillis();
+        huffman.compress(smallFile, "c_" + smallFile);
+        end = System.currentTimeMillis();
+
+        smallTime = end - start;
+
+        huffman = new Huffman(largeFile);
+        start = System.currentTimeMillis();
+        huffman.compress(largeFile, "c_" + largeFile);
+        end = System.currentTimeMillis();
+        largeTime = end - start;
+
+        assertEquals(smallTime, largeTime / 11, 300);
+
+        File file = new File("c_war.txt");
+        file.delete();
+        file = new File("c_rockyou.txt");
+        file.delete();
     }
 
     /**
@@ -32,27 +66,41 @@ public class HuffmanTests {
      */
     @Test
     public void testDecompress() throws IOException {
-        System.out.println("decompress");
-        String inFileName = "";
-        String outFileName = "";
-        Huffman instance = null;
+        System.out.println("Testing decompress()...");
+        String inFileName = "textfile_compressed.txt";
+        String outFileName = "textfile_decompressed.txt";
+        Huffman instance = new Huffman("textfile.txt");
+        instance.compress("textfile.txt", "textfile_compressed.txt");
         instance.decompress(inFileName, outFileName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        BufferedReader reader = new BufferedReader(new FileReader("textfile.txt"));
+        BufferedReader d_reader = new BufferedReader(new FileReader("textfile_decompressed.txt"));
+
+        while (reader.ready()) {
+            assertEquals(reader.read(), d_reader.read());
+        }
+
+        reader.close();
+        d_reader.close();
+
+        File file = new File("textfile_compressed.txt");
+        file.delete();
+
+        file = new File("textfile_decompressed.txt");
+        file.delete();
+
     }
 
     /**
      * Test of toString method, of class Huffman.
      */
     @Test
-    public void testToString() {
-        System.out.println("toString");
-        Huffman instance = null;
-        String expResult = "";
+    public void testToString() throws IOException {
+        System.out.println("Testing toString()...");
+        Huffman instance = new Huffman("textfile.txt");
+        String expResult = "|acb|";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }
