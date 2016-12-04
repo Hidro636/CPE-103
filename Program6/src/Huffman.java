@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -114,9 +115,9 @@ public class Huffman {
             }
         }
 
-        frequencies.entrySet().forEach((entry) -> {
+        for (Map.Entry<Character, Integer> entry : frequencies.entrySet()) {
             queue.add(new Node(entry.getKey(), entry.getValue()));
-        });
+        }
 
         while (queue.size() > 1) {
             queue.add(new Node(queue.poll(), queue.poll()));
