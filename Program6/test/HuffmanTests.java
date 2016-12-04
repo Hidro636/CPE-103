@@ -53,7 +53,7 @@ public class HuffmanTests {
         end = System.currentTimeMillis();
         largeTime = end - start;
 
-        assertEquals(smallTime, largeTime / 11, 200);
+        assertEquals(smallTime, largeTime / 13, 200);
 
         File file = new File("c_war.txt");
         file.delete();
