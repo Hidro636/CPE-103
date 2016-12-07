@@ -13,19 +13,25 @@ import java.util.*;
 public class TSort {
     // Hides the constructor form javadoc utility and users.
 
-    private TSort() {
-    }
+    private static class Vertex {
 
-    private class Vertex<T> {
-
-        private T value;
+        private String value;
         private int inDegree;
+        private LinkedList<String> set;
 
-        public Vertex(T value) {
-            inDegree = 0;
+        public Vertex(String value) {
             this.value = value;
+            this.set = new LinkedList<>();
+            inDegree = 0;
         }
 
+        public void addOut(String v) {
+            set.add(v);
+        }
+
+    }
+
+    private TSort() {
     }
 
     /**
@@ -42,7 +48,7 @@ public class TSort {
      *
      * @throws IllegalArgumentException if:
      * <ul>
-     * <li>edges is emtpy with the message "input contains no edges"</li>
+     * <li>edges is empty with the message "input contains no edges"</li>
      * <li>edges has an odd number of vertices (incomplete pair) with the
      * message "input contains an odd number of tokens"</li>
      * <li>the graph contains a cycle (isn't acyclic) with the message "input
@@ -55,21 +61,28 @@ public class TSort {
         }
 
         Scanner input = new Scanner(edges);
-        HashMap<String, String> map = new HashMap<>();
-
+        HashMap<String, Vertex> map = new HashMap<>();
         while (input.hasNext()) {
             try {
-                map.put(input.next(), input.next());
-            } catch (NoSuchElementException nex) {
+                Vertex vertex = new Vertex(input.next());
+                if (map.containsKey(vertex.value)) {
+                    map.get(vertex.value).addOut(input.next());
+
+                } else {
+                    vertex.addOut(input.next());
+                    map.put(vertex.value, vertex);
+                }
+
+            } catch (NoSuchElementException ex) {
                 throw new IllegalArgumentException("input contains an odd number of tokens");
             }
         }
 
-        for (Map.Entry<String, String> entry : map.entrySet()) {
+        for (Map.Entry<String, Vertex> entry : map.entrySet()) {
             String key = entry.getKey();
-            String value = entry.getValue();
+            Vertex value = entry.getValue();
+            System.out.println(value.value + ": " + value.set + ", " + value.inDegree);
 
-            
         }
 
         return "";
