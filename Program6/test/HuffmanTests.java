@@ -32,35 +32,6 @@ public class HuffmanTests {
         file.delete();
     }
 
-    @Test
-    public void testCompressTime() throws IOException {
-        System.out.println("Testing compress() time...");
-        String smallFile = "war.txt";
-        String largeFile = "rockyou.txt";
-
-        long start, end, smallTime, largeTime;
-        Huffman huffman = new Huffman(smallFile);
-
-        start = System.currentTimeMillis();
-        huffman.compress(smallFile, "c_" + smallFile);
-        end = System.currentTimeMillis();
-
-        smallTime = end - start;
-
-        huffman = new Huffman(largeFile);
-        start = System.currentTimeMillis();
-        huffman.compress(largeFile, "c_" + largeFile);
-        end = System.currentTimeMillis();
-        largeTime = end - start;
-
-        assertEquals(smallTime, largeTime / 13, 250);
-
-        File file = new File("c_war.txt");
-        file.delete();
-        file = new File("c_rockyou.txt");
-        file.delete();
-    }
-
     /**
      * Test of decompress method, of class Huffman.
      */
