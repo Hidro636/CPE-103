@@ -73,7 +73,24 @@ public class Huffman {
             this.character = Character.MIN_VALUE;
         }
 
-        @Override
+        private int minChar(Node node, int minValue) {
+            if (node.left != null) {
+                minValue = minChar(node.left, minValue);
+            }
+
+            if (node.right != null) {
+                minValue = minChar(node.right, minValue);
+            }
+
+            if (this.character != Character.MIN_VALUE && (int) character < minValue) {
+                minValue = (int) character;
+            }
+
+            return minValue;
+
+        }
+
+        /*@Override
         public int compareTo(Node o) {
             if (this.frequency > o.frequency) {
                 return 1;
@@ -83,6 +100,20 @@ public class Huffman {
                 return -1;
             } else if ((int) this.character < (int) o.character) {
                 return 1;
+            } else {
+                return 0;
+            }
+        }*/
+        @Override
+        public int compareTo(Node o) {
+            if (this.frequency > o.frequency) {
+                return 1;
+            } else if (this.frequency < o.frequency) {
+                return -1;
+            } else if (this.minChar(this, Character.MAX_VALUE) > o.minChar(o, Character.MAX_VALUE)) {
+                return 1;
+            } else if (this.minChar(this, Character.MAX_VALUE) > o.minChar(o, Character.MAX_VALUE)) {
+                return -1;
             } else {
                 return 0;
             }
