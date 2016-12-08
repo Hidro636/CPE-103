@@ -16,6 +16,41 @@ public class HuffmanTests {
     public HuffmanTests() {
     }
 
+    @Test
+    public void testExample() throws IOException {
+        System.out.println("Testing given example...");
+        String inFileName = "test.txt";
+        String outFileName = "test_compressed.txt";
+        String decompressedFile = "test_decompressed.txt";
+        Huffman instance = new Huffman(inFileName);
+        instance.compress(inFileName, outFileName);
+
+        assertEquals(instance.toString(), "| bdca|");
+        //assertEquals(instance.toString(), "|fwchognisrat|");
+
+        BufferedReader reader = new BufferedReader(new FileReader(outFileName));
+        StringBuilder sb = new StringBuilder();
+        while (reader.ready()) {
+            sb.append((char) reader.read());
+        }
+        reader.close();
+
+        assertEquals("11011011000011011010011010011", sb.toString());
+
+        instance.decompress(outFileName, decompressedFile);
+
+        reader = new BufferedReader(new FileReader(decompressedFile));
+        BufferedReader reader2 = new BufferedReader(new FileReader(inFileName));
+
+        while (reader.ready() && reader2.ready()) {
+            assertEquals(reader.read(), reader2.read());
+        }
+
+        reader.close();
+        reader2.close();
+
+    }
+
     /**
      * Test of compress method, of class Huffman.
      */
@@ -29,7 +64,7 @@ public class HuffmanTests {
 
         //Cleanup
         File file = new File(outFileName);
-        file.delete();
+        //file.delete();
     }
 
     /**
@@ -55,11 +90,10 @@ public class HuffmanTests {
         d_reader.close();
 
         File file = new File("textfile_compressed.txt");
-        file.delete();
+        //file.delete();
 
         file = new File("textfile_decompressed.txt");
-        file.delete();
-
+        //file.delete();
     }
 
     /**

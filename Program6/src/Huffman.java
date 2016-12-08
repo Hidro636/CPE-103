@@ -90,20 +90,6 @@ public class Huffman {
 
         }
 
-        /*@Override
-        public int compareTo(Node o) {
-            if (this.frequency > o.frequency) {
-                return 1;
-            } else if (this.frequency < o.frequency) {
-                return -1;
-            } else if ((int) this.character > (int) o.character) {
-                return -1;
-            } else if ((int) this.character < (int) o.character) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }*/
         @Override
         public int compareTo(Node o) {
             if (this.frequency > o.frequency) {
