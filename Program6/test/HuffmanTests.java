@@ -1,6 +1,7 @@
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import org.junit.Test;
@@ -13,6 +14,8 @@ import static org.junit.Assert.*;
  */
 public class HuffmanTests {
 
+    private static Huffman h;
+    
     public HuffmanTests() {
     }
 
@@ -107,5 +110,26 @@ public class HuffmanTests {
         String result = instance.toString();
         assertEquals(expResult, result);
     }
+    
+    @Test(timeout=10000)
+   public void test04a_createHuffman_file0() throws FileNotFoundException, IOException {
+      h = new Huffman("file0.txt");
+      String s = h.toString();
+      assertEquals("| bdca|", s);
+   }
+   @Test(timeout=10000)
+   public void test04b_compress_file0() throws FileNotFoundException, IOException {
+      h.compress("file0.txt", "file0_compressed.txt");
+      Process proc = Runtime.getRuntime().exec("FC file0_compressed_solution.txt file0_compressed.txt");
+      assertEquals(-1, proc.getInputStream().read());
+      assertEquals(-1, proc.getErrorStream().read());
+   }
+   @Test(timeout=10000)
+   public void test04c_decompress_file0() throws FileNotFoundException, IOException {
+      h.decompress("file0_compressed.txt", "file0_copy.txt");
+      Process proc = Runtime.getRuntime().exec("FC file0_copy_solution.txt file0_copy.txt");
+      assertEquals(-1, proc.getInputStream().read());
+      assertEquals(-1, proc.getErrorStream().read());
+   }
 
 }

@@ -120,7 +120,7 @@ public class HuffmanAcceptanceTests {
    public void test04a_createHuffman_file0() throws FileNotFoundException, IOException {
       h = new Huffman("file0.txt");
       String s = h.toString();
-      assertEquals("| bdca|", s);
+      assertEquals("| bdca|", s);
    }
    @Test(timeout=10000)
    public void test04b_compress_file0() throws FileNotFoundException, IOException {
@@ -132,7 +132,7 @@ public class HuffmanAcceptanceTests {
    @Test(timeout=10000)
    public void test04c_decompress_file0() throws FileNotFoundException, IOException {
       h.decompress("file0_compressed.txt", "file0_copy.txt");
-      Process proc = Runtime.getRuntime().exec("diff file0_copy_solution.txt file0_copy.txt");
+      Process proc = Runtime.getRuntime().exec("diff file0.txt file0_copy.txt");
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
@@ -141,7 +141,7 @@ public class HuffmanAcceptanceTests {
           
       h = new Huffman("file1.txt");
       String s = h.toString();
-      assertEquals("| tld\n.Tahinwoexfs|", s);
+      assertEquals("| tfl.Tadnihoxw\nes|", s);
    }
    @Test(timeout=10000)
    public void test05b_compress_file1() throws FileNotFoundException, IOException {
@@ -153,28 +153,28 @@ public class HuffmanAcceptanceTests {
    @Test(timeout=10000)
    public void test05c_decompress_file1() throws FileNotFoundException, IOException {
       h.decompress("file1_compressed.txt", "file1_copy.txt");
-      Process proc = Runtime.getRuntime().exec("diff file1_copy_solution.txt file1_copy.txt");
+      Process proc = Runtime.getRuntime().exec("diff file1.txt file1_copy.txt");
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
-   @Test(timeout=1200)
+   @Test(timeout=1600)
    public void test06a_createHuffman_file2() throws FileNotFoundException, IOException {
           
       h = new Huffman("file2.txt");
       String s = h.toString();
-      assertEquals("|eht\n |", s);
+      assertEquals("|\n eht|", s);
    }
-   @Test(timeout=1200)
+   @Test(timeout=4000)
    public void test06b_compress_file2() throws FileNotFoundException, IOException {
       h.compress("file2.txt", "file2_compressed.txt");
       Process proc = Runtime.getRuntime().exec("diff file2_compressed_solution.txt file2_compressed.txt");
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
-   @Test(timeout=2000)
+   @Test(timeout=4000)
    public void test06c_decompress_file2() throws FileNotFoundException, IOException {
       h.decompress("file2_compressed.txt", "file2_copy.txt");
-      Process proc = Runtime.getRuntime().exec("diff file2_copy_solution.txt file2_copy.txt");
+      Process proc = Runtime.getRuntime().exec("diff file2.txt file2_copy.txt");
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
@@ -183,7 +183,7 @@ public class HuffmanAcceptanceTests {
           
       h = new Huffman("file3.txt");
       String s = h.toString();
-      assertEquals("|\neduahfgbcmltowiykjpvrsn|", s);
+      assertEquals("|\neduahfgbcmltowiykjpvrsn|", s);
    }
    @Test(timeout=10000)
    public void test07b_compress_file3() throws FileNotFoundException, IOException {
@@ -195,19 +195,19 @@ public class HuffmanAcceptanceTests {
    @Test(timeout=10000)
    public void test07c_decompress_file3() throws FileNotFoundException, IOException {
       h.decompress("file3_compressed.txt", "file3_copy.txt");
-      Process proc = Runtime.getRuntime().exec("diff file3_copy_solution.txt file3_copy.txt");
+      Process proc = Runtime.getRuntime().exec("diff file3.txt file3_copy.txt");
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
-   @Test(timeout=500)
+   @Test(timeout=800)
    public void test08a_createHuffman_file_WAP() throws FileNotFoundException,
           IOException {
           
       h = new Huffman("file_War_And_Peace.txt");
       String s = h.toString();
-      assertEquals("|eshinoygla\nvPSWK82L!MRftwmdcTEx-b.A'IB:97Z/0Fur\"HjCqzNp,kV;DO)(Y61GJ5*^Q}{|[_=%\\~$]&4X3U? |", s);
+      assertEquals("|eshinoygla\nvPSWK82L!MRftwmdcTEx-b.A'IB:97Z/0Fur\"HjCqzNp,kV;DO)(Y61GJ5*^Q}_=|{%[\\~$]&4X3U? |", s);
    }
-   @Test(timeout=1000)
+   @Test(timeout=2400)
    public void test08b_compress_file_WAP() throws FileNotFoundException,
           IOException {
       h.compress("file_War_And_Peace.txt", "file_War_And_Peace_compressed.txt");
@@ -215,11 +215,11 @@ public class HuffmanAcceptanceTests {
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
-   @Test(timeout=1200)
+   @Test(timeout=2800)
    public void test08c_decompress_file_WAP() throws FileNotFoundException,
           IOException {
       h.decompress("file_War_And_Peace_compressed.txt", "file_War_And_Peace_copy.txt");
-      Process proc = Runtime.getRuntime().exec("diff file_War_And_Peace_copy_solution.txt file_War_And_Peace_copy.txt");
+      Process proc = Runtime.getRuntime().exec("diff file_War_And_Peace.txt file_War_And_Peace_copy.txt");
       assertEquals(-1, proc.getInputStream().read());
       assertEquals(-1, proc.getErrorStream().read());
    }
@@ -229,7 +229,7 @@ public class HuffmanAcceptanceTests {
           IOException {
       Huffman h1 = new Huffman("file0.txt");
       Huffman h2 = new Huffman("file1.txt");
-      assertEquals("| bdca|", h1.toString());
-      assertEquals("| tld\n.Tahinwoexfs|", h2.toString());
+      assertEquals("| bdca|", h1.toString());
+      assertEquals("| tfl.Tadnihoxw\nes|", h2.toString());
    }
 } 
