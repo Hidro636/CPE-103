@@ -66,39 +66,57 @@ public class Huffman {
             this.right = null;
         }
 
+//        public Node(Node left, Node right) {
+//            this.frequency = left.frequency + right.frequency;
+//            this.left = left;
+//            this.right = right;
+//            this.character = Character.MIN_VALUE;
+//        }
         public Node(Node left, Node right) {
             this.frequency = left.frequency + right.frequency;
             this.left = left;
             this.right = right;
-            this.character = Character.MIN_VALUE;
+            if ((int) left.character < (int) right.character) {
+                this.character = left.character;
+            } else {
+                this.character = right.character;
+            }
         }
 
-        private int minChar(Node node, int minValue) {
-            if (node.left != null) {
-                minValue = minChar(node.left, minValue);
-            }
-
-            if (node.right != null) {
-                minValue = minChar(node.right, minValue);
-            }
-
-            if (this.character != Character.MIN_VALUE && (int) character < minValue) {
-                minValue = (int) character;
-            }
-
-            return minValue;
-
+        public boolean isLeaf() {
+            return left == null && right == null;
         }
 
+//        private int minChar(Node node, int minValue) {
+//            if (node.left != null) {
+//                minValue = minChar(node.left, minValue);
+//            }
+//
+//            if (node.right != null) {
+//                minValue = minChar(node.right, minValue);
+//            }
+//
+//            if (this.character != Character.MIN_VALUE && (int) character < minValue) {
+//                minValue = (int) character;
+//            }
+//
+//            return minValue;
+//
+//        }
         @Override
         public int compareTo(Node o) {
             if (this.frequency > o.frequency) {
                 return 1;
             } else if (this.frequency < o.frequency) {
                 return -1;
-            } else if (this.minChar(this, Character.MAX_VALUE) > o.minChar(o, Character.MAX_VALUE)) {
+            } //            } else if (this.minChar(this, Character.MAX_VALUE) > o.minChar(o, Character.MAX_VALUE)) {
+            //                return 1;
+            //            } else if (this.minChar(this, Character.MAX_VALUE) > o.minChar(o, Character.MAX_VALUE)) {
+            //                return -1;
+            //            } 
+            else if (this.character > o.character) {
                 return 1;
-            } else if (this.minChar(this, Character.MAX_VALUE) > o.minChar(o, Character.MAX_VALUE)) {
+            } else if (this.character < o.character) {
                 return -1;
             } else {
                 return 0;
@@ -154,7 +172,8 @@ public class Huffman {
             buildDictionary(node.right, code + "1");
         }
 
-        if (node.character != Character.MIN_VALUE) {
+        //if (node.character != Character.MIN_VALUE) {
+        if (node.isLeaf()) {
             dictionary.put(node.character, code);
         }
     }
@@ -211,7 +230,8 @@ public class Huffman {
 
     private String preOrder(Node node, String string) {
 
-        if (node.character != Character.MIN_VALUE) {
+        //if (node.character != Character.MIN_VALUE) {
+        if (node.isLeaf()) {
             string += node.character;
         }
 
